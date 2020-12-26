@@ -10,6 +10,8 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    protected $keyType = 'string';
+    public $incrementing = 'false';
 
     /**
      * The attributes that are mass assignable.
@@ -40,4 +42,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function customerInfo(){
+        return $this->hasOne(Customer::class);
+    }
+
+    public function sellerInfo(){
+        return $this->hasOne(Seller::class);
+    }
 }
