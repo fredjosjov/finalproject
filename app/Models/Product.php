@@ -9,7 +9,12 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function usesTimestamps():bool
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
+    }
+
+    public function usesTimestamps(): bool
     {
         return false;
     }

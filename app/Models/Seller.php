@@ -13,6 +13,10 @@ class Seller extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function store(){
+        return $this->hasOne(Store::class);
+    }
+
     public function usesTimestamps():bool
     {
         return false;
