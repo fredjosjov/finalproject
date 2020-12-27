@@ -14,11 +14,13 @@ https://laravel.com/docs/8.x/installation
 
 2. In order for the database to properly work, please kindly configure the `.env` file first. The following information needs to be adjusted according to your PhpMyAdmin database parameters:
 > `DB_PORT=`   
-> `DB_DATABASE=`  
+> `DB_DATABASE=ecom_final`  
 > `DB_USERNAME=`  
 > `DB_PASSWORD=`
 
-3. Utilizing the terminal, please move to the project's directory and run `php artisan serve`. Alternatively, this can be done using the IDE's terminal.
+3. Seed the newly created database by running `php artisan db:seed` using your project's terminal.
 
-4. Access the application by accessing `http://127.0.0.1` followed by `:` and your laravel's `port` number. As an example: `http://127.0.0.1/8000`. 
+4. Utilizing the terminal, please move to the project's directory and run `php artisan serve`. Alternatively, this can be done using the IDE's terminal.
+
+5. Access the application by accessing `http://127.0.0.1` followed by `:` and your laravel's `port` number. As an example: `http://127.0.0.1/8000`. 
 
