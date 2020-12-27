@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Model;
 use App\Models\Order;
 use App\Models\Customer;
 use App\Models\Seller;
