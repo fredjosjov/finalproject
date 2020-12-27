@@ -25,7 +25,7 @@ class ProductFactory extends Factory
     {
         $store = Store::factory()->create();
         return [
-            'store_id' => Store::latest()->first(),
+            'store_id' => $store->id,
             'name' => $this->faker->word,
             'quantity' => $this->faker->numberBetween($min = 0, $max = 100),
             'price' => $this->faker->randomFloat($nbMaxDecimals= 2, $min = 0, $max= 999),

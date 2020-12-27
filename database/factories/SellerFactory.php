@@ -31,8 +31,8 @@ class SellerFactory extends Factory
             'updated_at' => now(),
             'created_at' => now()
         ]);
-        $income = $this->faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max= NULL);
-        $expense = $this->faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max= NULL);
+        $income = 0;
+        $expense = 0;
         return [
             'user_id' => $user->id,
             'firstName' => $this->faker->firstName,

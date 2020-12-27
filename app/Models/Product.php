@@ -14,6 +14,10 @@ class Product extends Model
         return $this->belongsTo(Store::class);
     }
 
+    public function orders(){
+        return $this->belongsToMany(Order::class, 'order_details');
+    }
+
     public function usesTimestamps(): bool
     {
         return false;
