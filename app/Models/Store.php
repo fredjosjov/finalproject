@@ -16,4 +16,8 @@ class Store extends Model
     public function seller(){
         return $this->belongsTo(Seller::class);
     }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
 }
