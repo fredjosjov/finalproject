@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Order;
 use App\Models\Customer;
-use App\Models\Seller;
+use App\Models\Store;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,10 +25,10 @@ class OrderFactory extends Factory
     public function definition()
     {
         $customer = Customer::all()->random();
-        $seller = Seller::get()->last();
+        $store = Store::get()->last();
         return [
             'customer_id' => $customer->id,
-            'seller_id' => $seller->id,
+            'store_id' => $store->id,
             'totalAmount' => 0,
             'status' => 'Newly Created',
         ];
