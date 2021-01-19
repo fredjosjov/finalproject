@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 //Route::get('/checkout',[CheckoutController::class, 'index']); //laravel 8
+
+Route::get('/', 'App\Http\Controllers\LoginController@index');
+Route::post('/product', 'App\Http\Controllers\LoginController@login');
+Route::get('/product', 'App\Http\Controllers\productController@index');
+
 Route::get('/checkout', 'App\Http\Controllers\CheckoutController@index');
 Route::post('/checkout/payment', 'App\Http\Controllers\CheckoutController@payment');
 
