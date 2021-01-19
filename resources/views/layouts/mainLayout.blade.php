@@ -17,12 +17,15 @@
                 <a class="navbar-brand" href="/product">Home</a>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                    <a class="nav-link" href="/product">Browse</a>
-                    <a class="nav-link" href="/shoppingCart">Shopping Cart</a>
-                    <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="/product">Browse</a>
+                        <a class="nav-link" href="/shoppingCart">Shopping Cart</a>
+                        <a class="nav-link" href="#">About</a>
                     </div>
                 </div>
-                <a class="btn btn-danger my-2 my-sm-0" style="width:100px" href="/">Log Out</a>
+                <div class="navbar-nav">
+                <a class="nav-link" href="#">Name</a>
+                <a class="btn btn-danger my-2 my-sm-0" style="width:100px" href="/login">Log Out</a>
+                </div>
             </div>
         </nav>
         
