@@ -1,0 +1,20 @@
+h1 {
+    color: darkblue;
+}
+
+.analytics {
+    margin-top: 10px;
+}
+
+#analytics-navigation {
+    margin-left: 10px;
+    max-width: 400px;
+}
+
+#analytics-content {
+    margin-right: 10px;
+}
+
+#store-back-btn{
+    margin-top: 5px;
+}
