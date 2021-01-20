@@ -36,7 +36,22 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cart = new Cart;
+        $cart->customer_id = session('custId');
+        $cart->product_id = $request->productId;
+        $cart->store_id = $request->storeId;
+        $cart->quantity = '1';
+        $cart->price = $request->price;
+
+        $cart->save();
+
+        // Cart::create([
+        //     'customer_id' => session('custId'),
+        //     'product_id' => $request->productId,
+        //     'store_id' => $request->store_id,
+        //     'quantity' => '1',
+        //     'price' => $request->price
+        // ]);
     }
 
     /**

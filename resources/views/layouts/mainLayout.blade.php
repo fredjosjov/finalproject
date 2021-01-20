@@ -23,8 +23,7 @@
                     </div>
                 </div>
                 <div class="navbar-nav">
-                <a class="nav-link" href="#">Name</a>
-                <a class="btn btn-danger my-2 my-sm-0" style="width:100px" href="/login">Log Out</a>
+                    <a class="btn btn-danger my-2 my-sm-0" style="width:100px" href="/logout">Log Out</a>
                 </div>
             </div>
         </nav>

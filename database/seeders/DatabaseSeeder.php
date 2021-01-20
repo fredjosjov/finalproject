@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             \App\Models\Product::factory()->create();
             $this->call([OrderSeeder::class]);
         }
-
     }
+
+    
 }

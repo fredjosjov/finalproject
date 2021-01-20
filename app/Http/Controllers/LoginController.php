@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Login;
+// use App\Models\Login;
 use Illuminate\Http\Request;
-use Auth;
 
 class LoginController extends Controller
 {
@@ -21,29 +20,41 @@ class LoginController extends Controller
     //Login still not done
     public function login(Request $request)
     {
-        $email = $request->input('email');
+        $userinput = $request->input('username');
         $password = $request->input('password');
 
-        $loginEmail = Login::where('email', $email)->get('email');
-        $loginPass = Login::where('email', $email)->get('password');
+        $custId = \App\Models\Customer::all('id');
+        $custName = \App\Models\Customer::all('firstName');
 
-        if($email == $loginEmail){
-            echo 'cunt';
+        $users = \App\Models\Login::where('username', $userinput)->get();
+
+        if(count($users) > 0){
+            foreach($users as $user){
+                if($user->username == $userinput && $user->password == $password){
+                    foreach($custName as $name){
+                        session()->put('custName', $name->firstName);
+                    }
+                    foreach($custId as $id){
+                        session()->put('custId', $id->id);
+                    }
+                    if(session()->has('custId')){
+                        return redirect('product');
+                    }
+                }else{
+                    return redirect('login');
+                }
+            }
         }else{
-            echo 'dick';
+            return redirect('login');
         }
+    }
 
-        echo $email;
-        echo '<br>';
-        echo $password;
-        echo '<br>';
-        echo $loginEmail;
-        echo '<br>';
-        echo $loginPass;
-
-        // if($email or $loginData){
-        //     echo "success";
-        // }
+    public function logout()
+    {
+        if(session()->has('user')){
+            session()->pull('user');
+        }
+        return redirect('login');
     }
 
     /**

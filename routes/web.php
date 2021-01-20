@@ -18,9 +18,12 @@ Route::get('/', function () {
 });
 //Route::get('/checkout',[CheckoutController::class, 'index']); //laravel 8
 
-Route::get('/loginPage', 'App\Http\Controllers\LoginController@index');
-Route::post('/product', 'App\Http\Controllers\loginController@login');
+Route::get('/login', 'App\Http\Controllers\LoginController@index');
+Route::post('/login', 'App\Http\Controllers\loginController@login');
+Route::get('/logout', 'App\Http\Controllers\loginController@logout');
+
 Route::get('/product', 'App\Http\Controllers\productController@index');
+Route::post('/product', 'App\Http\Controllers\cartController@store');
 Route::get('/shoppingCart', 'App\Http\Controllers\cartController@index');
 
 Route::get('/checkout', 'App\Http\Controllers\CheckoutController@index');
