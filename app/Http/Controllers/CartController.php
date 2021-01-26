@@ -14,7 +14,10 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = Cart::all();
+        $user = session('custId');
+        $cart = Cart::where('customer_id', $user)->get();
+        // return $user;
+        // return $cart;
         return view('cart.index', ['cart'=>$cart]);
     }
 
@@ -36,6 +39,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $cart = new Cart;
         $cart->customer_id = session('custId');
         $cart->product_id = $request->productId;
@@ -44,14 +48,7 @@ class CartController extends Controller
         $cart->price = $request->price;
 
         $cart->save();
-
-        // Cart::create([
-        //     'customer_id' => session('custId'),
-        //     'product_id' => $request->productId,
-        //     'store_id' => $request->store_id,
-        //     'quantity' => '1',
-        //     'price' => $request->price
-        // ]);
+        return redirect("/product")->with('status', 'Product has beend added to cart');
     }
 
     /**
@@ -62,7 +59,7 @@ class CartController extends Controller
      */
     public function show(Cart $cart)
     {
-        //
+        return $cart;
     }
 
     /**
@@ -96,6 +93,8 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+        Cart::destroy($cart->id);
+        return redirect('/cart');
+        // return $cart;
     }
 }

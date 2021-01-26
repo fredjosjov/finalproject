@@ -17,24 +17,21 @@ class LoginController extends Controller
         return view('login.index');
     }
 
-    //Login still not done
     public function login(Request $request)
     {
-        $userinput = $request->input('username');
+        $userinput = $request->input('email');
         $password = $request->input('password');
 
-        $custId = \App\Models\Customer::all('id');
-        $custName = \App\Models\Customer::all('firstName');
+        $email = \App\Models\Login::where('email', $userinput)->get();
 
-        $users = \App\Models\Login::where('username', $userinput)->get();
-
-        if(count($users) > 0){
-            foreach($users as $user){
-                if($user->username == $userinput && $user->password == $password){
-                    foreach($custName as $name){
+        if(count($email) > 0){
+            foreach($email as $emails){
+                if($emails->email == $userinput && $emails->password == $password){
+                    $cust = \App\Models\Customer::where('user_id', $emails->id)->get();
+                    foreach($cust as $name){
                         session()->put('custName', $name->firstName);
                     }
-                    foreach($custId as $id){
+                    foreach($cust as $id){
                         session()->put('custId', $id->id);
                     }
                     if(session()->has('custId')){

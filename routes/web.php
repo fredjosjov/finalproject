@@ -23,8 +23,10 @@ Route::post('/login', 'App\Http\Controllers\loginController@login');
 Route::get('/logout', 'App\Http\Controllers\loginController@logout');
 
 Route::get('/product', 'App\Http\Controllers\productController@index');
-Route::post('/product', 'App\Http\Controllers\cartController@store');
-Route::get('/shoppingCart', 'App\Http\Controllers\cartController@index');
+
+Route::get('/cart', 'App\Http\Controllers\cartController@index');
+Route::post('/cart', 'App\Http\Controllers\cartController@store');
+Route::delete('/cart/{cart}', 'App\Http\Controllers\cartController@destroy');
 
 Route::get('/checkout', 'App\Http\Controllers\CheckoutController@index');
 Route::post('/checkout/payment', 'App\Http\Controllers\CheckoutController@payment');

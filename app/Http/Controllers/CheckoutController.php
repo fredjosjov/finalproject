@@ -18,10 +18,10 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-		$cart = DB::table('cart')
-	    ->join('customer', 'customer.id', '=', 'cart.customer_id')
-	    ->join('product', 'product.id', '=', 'cart.product_id')
-	    ->where('cart.customer_id', '=', 6)
+		$cart = DB::table('carts')
+	    ->join('customers', 'customers.id', '=', 'carts.customer_id')
+	    ->join('products', 'products.id', '=', 'carts.product_id')
+	    ->where('carts.customer_id', '=', 6)
 	    ->get();
 
     	return view('checkout.index', ['cart' => $cart]);
@@ -39,10 +39,10 @@ class CheckoutController extends Controller
 
     public function payment(Request $request)
     {
-    	$cart = DB::table('cart')
-	    ->join('customer', 'customer.id', '=', 'cart.customer_id')
-	    ->join('product', 'product.id', '=', 'cart.product_id')
-	    ->where('cart.customer_id', '=', 6)
+    	$cart = DB::table('carts')
+	    ->join('customers', 'customers.id', '=', 'carts.customer_id')
+	    ->join('products', 'products.id', '=', 'carts.product_id')
+	    ->where('carts.customer_id', '=', 6)
 	    ->get();
 	try{
 		//order

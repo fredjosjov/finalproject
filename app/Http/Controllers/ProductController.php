@@ -10,6 +10,17 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::all();
-        return view('product.index', ['product'=>$product]);
+        $store = \App\Models\Store::all();
+        return view('product.index', ['product'=>$product, 'store'=>$store]);
+    }
+
+    public function addToCart(Request $request)
+    {
+        return $request;
+    }
+
+    public function show(Product $product)
+    {
+        return $product;
     }
 }

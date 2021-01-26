@@ -18,7 +18,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link" href="/product">Browse</a>
-                        <a class="nav-link" href="/shoppingCart">Shopping Cart</a>
+                        <a class="nav-link" href="/cart">Shopping Cart</a>
                         <a class="nav-link" href="#">About</a>
                     </div>
                 </div>
