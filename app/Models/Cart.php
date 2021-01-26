@@ -10,5 +10,5 @@ class Cart extends Model
     // protected $fillable = ['customerId','productId','storeId','quantity','price'];
     public $timestamps = false;
 
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'cart_id';
 }
