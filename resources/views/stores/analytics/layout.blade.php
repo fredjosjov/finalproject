@@ -9,15 +9,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/analytics.css') }}">
-    <title>Hello, world!</title>
+    <title>Store Management</title>
 </head>
 <body>
 <div class="row">
     <div class="analytics col-md-2" id="analytics-navigation">
-        <h1>Analytics</h1>
-        <div class="row justify-content-end" id="store-back-btn">
-            <button type="submit" class="btn btn-primary">Back to Store</button>
-        </div>
+        <h1>Navigation</h1>
         <nav class="nav flex-column">
             <a class="nav-link active justify-content-center" href="#">Dashboard</a>
             <a class="nav-link active" href="#">Store</a>
@@ -36,4 +33,5 @@
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <script src="{{ asset('/js/bootstrap.bundle.min.js') }}"></script>
+    @yield('charts')
 </html>
