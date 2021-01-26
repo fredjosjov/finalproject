@@ -27,6 +27,8 @@ Route::get('/product', 'App\Http\Controllers\productController@index');
 Route::get('/cart', 'App\Http\Controllers\cartController@index');
 Route::post('/cart', 'App\Http\Controllers\cartController@store');
 Route::delete('/cart/{cart}', 'App\Http\Controllers\cartController@destroy');
+Route::post('/minusQty', 'App\Http\Controllers\cartController@minusQty');
+Route::post('/addQty', 'App\Http\Controllers\cartController@addQty');
 
 Route::get('/checkout', 'App\Http\Controllers\CheckoutController@index');
 Route::post('/checkout/payment', 'App\Http\Controllers\CheckoutController@payment');

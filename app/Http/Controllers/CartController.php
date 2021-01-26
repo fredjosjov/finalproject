@@ -15,10 +15,32 @@ class CartController extends Controller
     public function index()
     {
         $user = session('custId');
-        $cart = Cart::where('customer_id', $user)->get();
-        // return $user;
-        // return $cart;
+        $cart = Cart::where('customer_id', $user)
+                        ->join('products', 'products.id', '=', 'carts.product_id')
+                        ->join('stores', 'stores.id', '=', 'carts.store_id')
+                        ->get();
+
         return view('cart.index', ['cart'=>$cart]);
+    }
+
+    public function addQty(Request $request)
+    {
+        $qty = $request->quantity + 1;
+
+        Cart::where('cart_id', $request->id)
+            ->update(['cart_quantity' => $qty]);
+
+        return redirect('/cart');
+    }
+
+    public function minusQty(Request $request)
+    {
+        $qty = $request->quantity - 1;
+
+        Cart::where('cart_id', $request->id)
+            ->update(['cart_quantity' => $qty]);
+
+        return redirect('/cart');
     }
 
     /**
@@ -39,16 +61,50 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
-        $cart = new Cart;
-        $cart->customer_id = session('custId');
-        $cart->product_id = $request->productId;
-        $cart->store_id = $request->storeId;
-        $cart->quantity = '1';
-        $cart->price = $request->price;
+        $cp = Cart::where('customer_id', session('custId'))->get();
+        $pp = Cart::where('customer_id', session('custId'))
+                    ->where('product_id', $request->productId)
+                    ->get();
+        
+        if(count($cp) == 0){
+            $cart = new Cart;
+            $cart->customer_id = session('custId');
+            $cart->product_id = $request->productId;
+            $cart->store_id = $request->storeId;
+            $cart->cart_quantity = '1';
+            $cart->price = $request->price;
+            $cart->save();
+            return redirect("/product")->with('status', 'Product has been added to cart');
+        }else{
+            if(count($pp) == 0){
+                $cart = new Cart;
+                $cart->customer_id = session('custId');
+                $cart->product_id = $request->productId;
+                $cart->store_id = $request->storeId;
+                $cart->cart_quantity = '1';
+                $cart->price = $request->price;
+                $cart->save();
+                return redirect("/product")->with('status', 'Product has been added to cart');
+            }else{
+                foreach($pp as $p){
+                    $qty = $p->cart_quantity + 1;
+                    Cart::where('cart_id', $p->cart_id)
+                        ->update(['cart_quantity' => $qty]);
+                    return redirect("/product")->with('status', 'Product has been added to cart');
+                }
+            }
+        }
 
-        $cart->save();
-        return redirect("/product")->with('status', 'Product has beend added to cart');
+        // return $request;
+        // $cart = new Cart;
+        // $cart->customer_id = session('custId');
+        // $cart->product_id = $request->productId;
+        // $cart->store_id = $request->storeId;
+        // $cart->cart_quantity = '1';
+        // $cart->price = $request->price;
+
+        // $cart->save();
+        // return redirect("/product")->with('status', 'Product has beend added to cart');
     }
 
     /**
@@ -93,7 +149,7 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        Cart::destroy($cart->id);
+        Cart::destroy($cart->cart_id);
         return redirect('/cart');
         // return $cart;
     }
