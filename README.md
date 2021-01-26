@@ -30,6 +30,6 @@ https://laravel.com/docs/8.x/installation
     1. Using the terminal, move into the project's directory. (or simply open the project's IDE terminal)
     2. Run `sudo rm -rf vendor/` (basically remove the `vendor/` directory from the project. Windows user can adjust the command script accordingly)
     3. Run `sudo rm composer.lock` (Removing the `composer.lock` file from the project directory)
-    4. Run `composer.install`.
+    4. Run `composer install`.
     
 
