@@ -14,3 +14,5 @@ yarn-error.log
 ecom_final.sql
 .idea
 .DS_Store
+composer.lock
+/vendor
