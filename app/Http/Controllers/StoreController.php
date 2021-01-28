@@ -13,10 +13,10 @@ class StoreController extends Controller
     {
         $orders = $store->orders()->get();
         $revenue = 0;
+
         foreach ($orders as $order) {
             $revenue += $order->totalAmount;
         }
-        //TODO: chartData aggregation per day
 
         $recentOrders = Order::orderBy('created_at', 'DESC')->where('store_id', $store->id)->get();
         return view('stores.analytics.dashboard', [

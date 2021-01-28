@@ -10,17 +10,15 @@ setlocale(LC_MONETARY, 'en_US');
 @section('content')
     <h1>Dashboard</h1>
     <div class="row justify-content-center">
-        <div class="col-md-3">
-            <div class="row justify-content-center">
-                <div class="card text-center" style="width: 20rem;">
-                    <div class="card-body">
-                        <h2 class="card-title">Products Listed</h2>
-                        <h3 class="card-text">{{ $products->count() }}</h3>
-                    </div>
+        <div class="col-md-3 justify-content-center" style="display: flex;">
+            <div class="card text-center" style="width: 20rem;">
+                <div class="card-body">
+                    <h2 class="card-title">Products Listed</h2>
+                    <h3 class="card-text">{{ $products->count() }}</h3>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 justify-content-center" style="display: flex;">
             <div class="card text-center" style="width: 20rem;">
                 <div class="card-body">
                     <h2 class="card-title">Total Sales</h2>
@@ -28,7 +26,7 @@ setlocale(LC_MONETARY, 'en_US');
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 justify-content-center" style="display: flex;">
             <div class="card text-center" style="width: 20rem;">
                 <div class="card-body">
                     <h2 class="card-title">Completed Orders</h2>
@@ -68,18 +66,18 @@ setlocale(LC_MONETARY, 'en_US');
                         <td></td>
                     </tr>
                 @else
-                @foreach($activities as $activity)
-                    <tr>
-                        <th scope="row"><a
-                                href="customers/{{ $activity->customer_id }}">{{ $activity->customer->firstName }} {{ $activity->customer->lastName }}</a>
-                            placed an <a href="/orders/{{ $activity->id }}">order</a> worth
-                            of {{ money_format('%i',$activity->totalAmount) }}.
-                        </th>
-                        <td>{{ $activity->created_at->format('F d') }}</td>
-                    </tr>
-                @endforeach
+                    @foreach($activities as $activity)
+                        <tr>
+                            <th scope="row"><a
+                                    href="customers/{{ $activity->customer_id }}">{{ $activity->customer->firstName }} {{ $activity->customer->lastName }}</a>
+                                placed an <a href="/orders/{{ $activity->id }}">order</a> worth
+                                of {{ money_format('%i',$activity->totalAmount) }}.
+                            </th>
+                            <td>{{ $activity->created_at->format('F d H:i:s') }}</td>
+                        </tr>
+                    @endforeach
                 @endif
-                    </tbody>
+                </tbody>
             </table>
         </div>
     </div>
@@ -91,23 +89,21 @@ setlocale(LC_MONETARY, 'en_US');
     <script type="text/javascript">
         google.charts.load('current', {'packages': ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
-        //TODO: create an automatically filling array
-        var dates = [];
-        var sales = [];
+
+        var dataMapping = new Map([
+            ['Date', 'Sales']
+        ]);
+
         @foreach($orders as $order)
-        dates.push("{{ $order->created_at->format('F d') }}");
-        sales.push({{ $order->totalAmount }})
+        if (!dataMapping.has("{{ $order->created_at->format('F d') }}")) {
+            dataMapping.set("{{ $order->created_at->format('F d') }}", {{ $order->totalAmount }});
+        } else {
+            dataMapping.set("{{ $order->created_at->format('F d') }}", dataMapping.get("{{ $order->created_at->format('F d') }}") + {{ $order->totalAmount }});
+        }
         @endforeach
+
         function drawChart() {
-            //TODO: Make the data arrays in here to be automatically resizing
-            var data = google.visualization.arrayToDataTable([
-                ['Date', 'Sales'],
-                [dates[0], sales[0]],
-                [dates[1], sales[1]],
-                [dates[2], sales[2]],
-                [dates[3], sales[3]],
-                [dates[4], sales[4]]
-            ]);
+            var data = google.visualization.arrayToDataTable(Array.from(dataMapping));
 
             var options = {
                 legend: {
@@ -121,9 +117,13 @@ setlocale(LC_MONETARY, 'en_US');
                 height: 500
             };
 
-            var chart = new google.visualization.LineChart(document.getElementById('sales-trend'));
+            if (Array.from(dataMapping).length === 2) {
+                document.getElementById('sales-trend').innerHTML = "<h5 style=\"text-align: center;\">Not enough data to display results.</h5>"
+            } else {
+                var chart = new google.visualization.LineChart(document.getElementById('sales-trend'));
 
-            chart.draw(data, options);
+                chart.draw(data, options);
+            }
         }
     </script>
 @endsection
