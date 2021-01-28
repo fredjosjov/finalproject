@@ -1,3 +1,6 @@
+<?php
+setlocale(LC_MONETARY, 'en_US');
+?>
 @extends('stores.analytics.layout')
 
 @section('title')
@@ -21,7 +24,7 @@
             <div class="card text-center" style="width: 20rem;">
                 <div class="card-body">
                     <h2 class="card-title">Total Sales</h2>
-                    <h3 class="card-text">{{ $revenue }}</h3>
+                    <h3 class="card-text">{{ money_format('%i',$revenue)}}</h3>
                 </div>
             </div>
         </div>
@@ -32,10 +35,6 @@
                     <h3 class="card-text">{{ $orders->count() }}</h3>
                 </div>
             </div>
-{{--            <div class="row justify-content-center">--}}
-{{--                <h2>Completed Orders</h2>--}}
-{{--            </div>--}}
-{{--            <div class="row justify-content-center">{{ $orders->count() }}</div>--}}
         </div>
     </div>
     <div class="row justify-content-center">
@@ -50,7 +49,7 @@
         </div>
     </div>
     <div class="row">
-        <h2>Most Recent Activity</h2>
+        <h2>Most Recent Orders</h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -61,37 +60,28 @@
                     <th scope="col">Date</th>
                 </tr>
                 </thead>
+
                 <tbody>
-{{--                <tr>--}}
-{{--                    <th scope="row">No recent activity.</th>--}}
-{{--                    <td></td>--}}
-{{--                </tr>--}}
-{{--                </tbody>--}}
-                <tbody>
-                <tr>
-                    <th scope="row">Lorem Ipsum</th>
-                    <td>January 26</td>
-                </tr>
-                <tr>
-                    <th scope="row">Lorem Ipsum</th>
-                    <td>January 26</td>
-                </tr>
-                <tr>
-                    <th scope="row">Lorem Ipsum</th>
-                    <td>January 26</td>
-                </tr>
-                <tr>
-                    <th scope="row">Lorem Ipsum</th>
-                    <td>January 26</td>
-                </tr>
-                <tr>
-                    <th scope="row">Lorem Ipsum</th>
-                    <td>January 26</td>
-                </tr>
-                </tbody>
+                @if(count($activities) === null)
+                    <tr>
+                        <th scope="row">No recent activity.</th>
+                        <td></td>
+                    </tr>
+                @else
+                @foreach($activities as $activity)
+                    <tr>
+                        <th scope="row"><a
+                                href="customers/{{ $activity->customer_id }}">{{ $activity->customer->firstName }} {{ $activity->customer->lastName }}</a>
+                            placed an <a href="/orders/{{ $activity->id }}">order</a> worth
+                            of {{ money_format('%i',$activity->totalAmount) }}.
+                        </th>
+                        <td>{{ $activity->created_at->format('F d') }}</td>
+                    </tr>
+                @endforeach
+                @endif
+                    </tbody>
             </table>
         </div>
-        {{--should be a table that list all of the most recent activity in the store--}}
     </div>
 
 @endsection
@@ -109,6 +99,7 @@
         sales.push({{ $order->totalAmount }})
         @endforeach
         function drawChart() {
+            //TODO: Make the data arrays in here to be automatically resizing
             var data = google.visualization.arrayToDataTable([
                 ['Date', 'Sales'],
                 [dates[0], sales[0]],
