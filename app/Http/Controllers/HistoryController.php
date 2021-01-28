@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\History;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller
@@ -16,8 +17,8 @@ class HistoryController extends Controller
     {
         if(session()->has('credentials')){
             $orderHistory = History::where('customer_id', session('custId'))
-                                    ->join('order_details', 'order_details.order_id', '=', 'orders.id')
-                                    ->join('products', 'products.id', '=', 'order_details.product_id')
+                                    ->join('sellers', 'sellers.id', '=', 'orders.seller_id')
+                                    ->join('stores', 'stores.seller_id', '=', 'sellers.id')
                                     ->get();
             return view('history.index', compact('orderHistory'));
         }else{
@@ -49,12 +50,15 @@ class HistoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\History  $history
+     * @param  \App\Models\OrderDetails  $orderDetails
      * @return \Illuminate\Http\Response
      */
-    public function show(History $history)
+    public function show(Request $request)
     {
-        //
+        $orderDetails = \App\Models\OrderDetails::where('order_id', $request->orderId)
+                        ->join('products', 'products.id', '=', 'order_details.product_id')
+                        ->get();
+        return view('history.detail', compact('orderDetails'));
     }
 
     /**

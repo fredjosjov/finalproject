@@ -31,6 +31,7 @@ Route::post('/minusQty', 'App\Http\Controllers\cartController@minusQty');
 Route::post('/addQty', 'App\Http\Controllers\cartController@addQty');
 
 Route::get('/history', 'App\Http\Controllers\historyController@index');
+Route::post('/detail', 'App\Http\Controllers\historyController@show');
 
 Route::get('/checkout', 'App\Http\Controllers\CheckoutController@index');
 Route::post('/checkout/payment', 'App\Http\Controllers\CheckoutController@payment');

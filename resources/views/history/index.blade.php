@@ -15,9 +15,13 @@
             @foreach($orderHistory as $history)
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title">{{$history->name}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Rp {{$history->price}}</h6>
-                    <p class="card-text">Quantity ordered: {{$history->quantity}}</p>
+                    <h5 class="card-title">Store: {{$history->store_name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Total Amount: Rp {{$history->totalAmount}}</h6>
+                    <form action="/detail" method="post">
+                    @csrf
+                        <input type="text" name="orderId" style="display:none" value="{{$history->orderId}}">
+                        <button class="btn btn-primary">Details</button>
+                    </form>
                 </div>
             </div>
             @endforeach
