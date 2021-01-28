@@ -9,9 +9,13 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $product = Product::all();
-        $store = \App\Models\Store::all();
-        return view('product.index', ['product'=>$product, 'store'=>$store]);
+        if(session()->has('credentials')){
+            $product = Product::all();
+            $store = \App\Models\Store::all();
+            return view('product.index', ['product'=>$product, 'store'=>$store]);
+        }else{
+            return redirect('/');
+        }
     }
 
     public function addToCart(Request $request)

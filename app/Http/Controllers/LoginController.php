@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-// use App\Models\Login;
+use App\Models\Login;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -14,44 +15,53 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('login.index');
+        if(session()->has('credentials')){
+            return redirect('/product');
+        }else{
+            return view('login.index');
+        }
     }
 
-    public function login(Request $request)
-    {
-        $userinput = $request->input('email');
-        $password = $request->input('password');
+    public function login(Request $request){
+        $emailInput = $request->email;
+        $passwordInput = $request->password;
 
-        $email = \App\Models\Login::where('email', $userinput)->get();
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+        
+        $users = Login::where('email', $emailInput)->get();
 
-        if(count($email) > 0){
-            foreach($email as $emails){
-                if($emails->email == $userinput && $emails->password == $password){
-                    $cust = \App\Models\Customer::where('user_id', $emails->id)->get();
-                    foreach($cust as $name){
-                        session()->put('custName', $name->firstName);
+        if(count($users) == 0){
+            return redirect('/')->with('status', 'Login credentials are Invalid!');
+        }else{
+            foreach($users as $user){
+                if($emailInput == $user->email && $passwordInput == $user->password){
+                    session()->put('credentials', $user->email);
+                    $customer = Customer::where('user_id', $user->id)->get();
+                    foreach($customer as $cust){
+                        session()->put('custId', $cust->id);
+                        session()->put('custName', $cust->firstName . ' ' . $cust->lastName);
                     }
-                    foreach($cust as $id){
-                        session()->put('custId', $id->id);
-                    }
-                    if(session()->has('custId')){
-                        return redirect('product');
-                    }
+                    return redirect('/product');
                 }else{
-                    return redirect('login');
+                    return redirect('/')->with('status', 'Login credentials are Invalid!');
                 }
             }
-        }else{
-            return redirect('login');
         }
     }
 
     public function logout()
     {
-        if(session()->has('user')){
-            session()->pull('user');
+        if(session()->has('credentials')){
+            session()->pull('credentials');
+            session()->pull('custId');
+            session()->pull('custName');
+            return redirect('/');
+        }else{
+            return redirect('/product');
         }
-        return redirect('login');
     }
 
     /**
