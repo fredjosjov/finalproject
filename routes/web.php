@@ -41,4 +41,6 @@ Route::post('/edit-profile/update/{id}', 'App\Http\Controllers\CustomerControlle
 
 Route::get('/shipping', 'App\Http\Controllers\ShippingController@index');
 Route::get('/wishlist', 'App\Http\Controllers\WishlistController@index');
+
 Route::get('/store/{store}/analytics', 'App\Http\Controllers\StoreController@stats');
+Route::get('/store/{store}/order/{id}', 'App\Http\Controllers\OrderController@show');

@@ -1,7 +1,7 @@
 <?php
 setlocale(LC_MONETARY, 'en_US');
 ?>
-@extends('stores.analytics.layout')
+@extends('stores.layout')
 
 @section('title')
     <h1>{{ ucfirst($store->name) }}'s Store</h1>
@@ -70,8 +70,8 @@ setlocale(LC_MONETARY, 'en_US');
                         <tr>
                             <th scope="row"><a
                                     href="customers/{{ $activity->customer_id }}">{{ $activity->customer->firstName }} {{ $activity->customer->lastName }}</a>
-                                placed an <a href="/orders/{{ $activity->id }}">order</a> worth
-                                of {{ money_format('%i',$activity->totalAmount) }}.
+                                placed an <a href="/store/{{ $store->id }}/order/{{ $activity->id }}">order</a> worth
+                                of {{ money_format('%i' , $activity->totalAmount) }}.
                             </th>
                             <td>{{ $activity->created_at->format('F d H:i:s') }}</td>
                         </tr>
