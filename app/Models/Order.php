@@ -15,7 +15,8 @@ class Order extends Model
     use HasFactory;
 
     public function products(){
-        return $this->belongsToMany(Product::class, 'order_details');
+        return $this->belongsToMany(Product::class, 'order_details')
+            ->withPivot('quantity', 'price');
     }
     public function customer(){
         return $this->belongsTo(Customer::class);
