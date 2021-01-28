@@ -14,7 +14,7 @@
 <body>
 <div class="row">
     <div class="analytics col-md-2" id="analytics-navigation">
-        <h1>Navigation</h1>
+        @yield('title')
         <nav class="nav flex-column">
             <a class="nav-link active justify-content-center" href="#">Dashboard</a>
             <a class="nav-link active" href="#">Store</a>

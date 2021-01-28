@@ -1,13 +1,18 @@
 @extends('stores.analytics.layout')
+
+@section('title')
+    <h1>{{ ucfirst($store->name) }}'s Store</h1>
+@endsection
+
 @section('content')
-    <h1>{{ ucfirst($store->name) . '\'s Store Statistics' }}</h1>
+    <h1>Dashboard</h1>
     <div class="row justify-content-center">
         <div class="col-md-3">
             <div class="row justify-content-center">
                 <div class="card text-center" style="width: 20rem;">
                     <div class="card-body">
                         <h2 class="card-title">Products Listed</h2>
-                        <h4 class="card-text">{{ $products->count() }}</h4>
+                        <h3 class="card-text">{{ $products->count() }}</h3>
                     </div>
                 </div>
             </div>
@@ -16,7 +21,7 @@
             <div class="card text-center" style="width: 20rem;">
                 <div class="card-body">
                     <h2 class="card-title">Total Sales</h2>
-                    <h4 class="card-text">{{ $revenue }}</h4>
+                    <h3 class="card-text">{{ $revenue }}</h3>
                 </div>
             </div>
         </div>
