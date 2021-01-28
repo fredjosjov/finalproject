@@ -14,13 +14,16 @@ class CartController extends Controller
      */
     public function index()
     {
-        $user = session('custId');
-        $cart = Cart::where('customer_id', $user)
-                        ->join('products', 'products.id', '=', 'carts.product_id')
-                        ->join('stores', 'stores.id', '=', 'carts.store_id')
-                        ->get();
-
-        return view('cart.index', ['cart'=>$cart]);
+        if(session()->has('credentials')){
+            $user = session('custId');
+            $cart = Cart::where('customer_id', $user)
+                            ->join('products', 'products.id', '=', 'carts.product_id')
+                            ->join('stores', 'stores.id', '=', 'carts.store_id')
+                            ->get();
+            return view('cart.index', ['cart'=>$cart]);
+        }else{
+            return redirect('/');
+        }
     }
 
     public function addQty(Request $request)

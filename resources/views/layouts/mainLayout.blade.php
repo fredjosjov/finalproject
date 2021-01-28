@@ -19,7 +19,7 @@
                     <div class="navbar-nav">
                         <a class="nav-link" href="/product">Browse</a>
                         <a class="nav-link" href="/cart">Shopping Cart</a>
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="/history">History</a>
                     </div>
                 </div>
                 <div class="navbar-nav">

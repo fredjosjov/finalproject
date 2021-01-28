@@ -27,7 +27,7 @@
                             @foreach( $store as $stores )
                                 <p class="card-text">{{$stores->name}}</p>
                             @endforeach
-                            <p class="" id="price" name="price">{{$products->price}}</p>
+                            <p class="" id="price" name="price">Rp {{$products->price}}</p>
                             <button class="btn btn-primary">Add to Cart</button>
                         </div>
                     </div>

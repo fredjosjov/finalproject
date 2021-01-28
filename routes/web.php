@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 //Route::get('/checkout',[CheckoutController::class, 'index']); //laravel 8
 
-Route::get('/login', 'App\Http\Controllers\LoginController@index');
+Route::get('/', 'App\Http\Controllers\LoginController@index');
 Route::post('/login', 'App\Http\Controllers\loginController@login');
 Route::get('/logout', 'App\Http\Controllers\loginController@logout');
 
@@ -29,6 +29,8 @@ Route::post('/cart', 'App\Http\Controllers\cartController@store');
 Route::delete('/cart/{cart}', 'App\Http\Controllers\cartController@destroy');
 Route::post('/minusQty', 'App\Http\Controllers\cartController@minusQty');
 Route::post('/addQty', 'App\Http\Controllers\cartController@addQty');
+
+Route::get('/history', 'App\Http\Controllers\historyController@index');
 
 Route::get('/checkout', 'App\Http\Controllers\CheckoutController@index');
 Route::post('/checkout/payment', 'App\Http\Controllers\CheckoutController@payment');
