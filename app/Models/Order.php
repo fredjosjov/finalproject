@@ -25,4 +25,8 @@ class Order extends Model
     public function store(){
         return $this->belongsTo(Store::class);
     }
+
+    public function seller(){
+        return $this->belongsTo(Seller::class);
+    }
 }

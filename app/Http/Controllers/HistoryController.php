@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\History;
 use App\Models\OrderDetails;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -17,11 +16,8 @@ class HistoryController extends Controller
     public function index()
     {
         if(session()->has('credentials')){
-            $orderHistory = History::where('customer_id', session('custId'))
-                                    ->join('sellers', 'sellers.id', '=', 'orders.seller_id')
-                                    ->join('stores', 'stores.seller_id', '=', 'sellers.id')
-                                    ->get();
-            return view('history.index', compact('orderHistory'));
+            $orders = Order::where('customer_id', session('custId'))->get();
+            return view('history.index', compact('orders'));
         }else{
             return redirect('/');
         }
@@ -52,22 +48,24 @@ class HistoryController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\OrderDetails  $orderDetails
-//     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function show(Request $request)
     {
+        $id = $request->orderId;
 //        $orderDetails = \App\Models\OrderDetails::where('order_id', $request->orderId)
 //                        ->join('products', 'products.id', '=', 'order_details.product_id')
 //                        ->get();
 
-        $order = Order::get()->where('id', $request->orderId);
+        $order = Order::where('id', $id)->get()->first();
+        // dd($order);
         $products = $order->products;
-
-//        return view('history.detail', compact('orderDetails'));
+        
+        //        return view('history.detail', compact('orderDetails'));
         return view('history.detail', [
             'order' => $order,
             'products' => $products
-        ]);
+            ]);
     }
 
     /**
