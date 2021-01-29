@@ -16,7 +16,7 @@
     <div class="analytics col-md-2" id="analytics-navigation">
         @yield('title')
         <nav class="nav flex-column">
-            <a class="nav-link active justify-content-center" href="#">Dashboard</a>
+            <a class="nav-link active justify-content-center" href="{{ URL('store/'. $store->id . '/analytics') }}">Dashboard</a>
             <a class="nav-link active" href="#">Store</a>
             <a class="nav-link active" href="#">Customers</a>
             <a class="nav-link active" href="#">Products</a>
