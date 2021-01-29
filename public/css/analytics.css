@@ -15,6 +15,19 @@ h1 {
     margin-right: 10px;
 }
 
+.main-cards {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+}
+
+.main-card-title {
+    background: #bbb;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #bbbbbb;
+}
+
 #store-back-btn {
     margin-top: 5px;
 }
@@ -77,7 +90,7 @@ h1 {
     padding-left: 10px;
 }
 
-.summary-details, .shipping-details{
+.summary-details, .shipping-details {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 0;
@@ -97,6 +110,27 @@ h1 {
 #address {
     font-weight: normal;
     font-size: 16px;
+}
+
+#status-label {
+    color: red;
+    margin-bottom: 0;
+    padding-right: 0;
+    padding-top: 12px;
+    text-align: end;
+
+}
+
+#status-field {
+    display: flex;
+    justify-content: end;
+}
+
+#support-message {
+    color: orange;
+    margin-bottom: 0;
+    padding-top: 8px;
+    text-align: end;
 }
 
 

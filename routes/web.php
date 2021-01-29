@@ -44,3 +44,4 @@ Route::get('/wishlist', 'App\Http\Controllers\WishlistController@index');
 
 Route::get('/store/{store}/analytics', 'App\Http\Controllers\StoreController@stats');
 Route::get('/store/{store}/order/{id}', 'App\Http\Controllers\OrderController@show');
+Route::put('/store/{store}/order/{id}/update', 'App\Http\Controllers\OrderController@update')->name('order-status.update');

@@ -12,6 +12,7 @@
     <title>Store Management</title>
 </head>
 <body>
+@yield('modal')
 <div class="row">
     <div class="analytics col-md-2" id="analytics-navigation">
         @yield('title')

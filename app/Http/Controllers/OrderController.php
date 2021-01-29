@@ -22,4 +22,15 @@ class OrderController extends Controller
             'store' => $order->store
         ]);
     }
+
+    public function update(Store $store, int $id, Request $request){
+        $order = Order::find(2);
+        $order->status = $request->status;
+        $order->save();
+        return view('stores.orders.show', [
+            'store' => $store,
+            'order' => $order,
+            'message' => 'Successfully updated Order Status.'
+        ]);
+    }
 }

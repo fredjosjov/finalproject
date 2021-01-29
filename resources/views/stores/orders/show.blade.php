@@ -7,6 +7,10 @@ setlocale(LC_MONETARY, 'en_US');
 
 @endsection
 
+@section('modal')
+
+@endsection
+
 @section('title')
     <h1>{{ ucfirst($store->name) }}'s Store</h1>
 @endsection
@@ -22,8 +26,7 @@ setlocale(LC_MONETARY, 'en_US');
             <div class="row" style="margin-bottom: 10px;">
                 <div class="col-md-4 justify-content-start" style="display: flex;">
                     <p class="summary-details">Customer
-                        : {{ $order->customer->firstName }} {{ $order->customer->lastName }} ({{ $order->customer_id }}
-                        )</p>
+                        : {{ $order->customer->firstName }} {{ $order->customer->lastName }} ({{ $order->customer_id }})</p>
                 </div>
                 <div class="col-md-4 justify-content-center" style="display: flex;">
                     <p class="summary-details">Order Date : {{ $order->created_at }}</p>
@@ -33,35 +36,57 @@ setlocale(LC_MONETARY, 'en_US');
                             id="total-value">{{ money_format('%i', $order->totalAmount) }}</span></p>
                 </div>
             </div>
-{{--            TODO: Update order status form action--}}
-            <form>
-            <div class="row" style="margin-bottom: 10px;">
-
+            <form method="post" action="{{ route('order-status.update', ['store'=> $store, 'id' => $order->id]) }}">
+                @csrf
+                @method('PUT')
+                <div class="row" style="margin-bottom: 10px;">
                     <div class="col-md-6">
-
                     </div>
                     <div class="col-md-4">
-                        <select class="form-control">
-                            <option value="{{ $order->status }}">{{ $order->status }}</option>
-                            <option value="Processed">Processed</option>
-                            <option value="Shipped">Shipped</option>
-                        </select>
+                        @switch($order->status)
+                            @case('Newly Created')
+                            <div class="form-group row" id="status-field">
+                                <label id="status-label" for="status-input" class="col-md-12">Processed Your
+                                    Order?</label>
+                                <input type="text" id="status-input" name="status" value="Processed" hidden>
+                            </div>
+                            @break
+                            @case('Processed')
+                            <div class="form-group row" id="status-field">
+                                <label id="status-label" for="status-input" class="col-md-12">Shipped Your
+                                    Order?</label>
+                                <input type="text" id="status-input" name="status" value="Shipped" hidden>
+                            </div>
+                            @break
+                            @case('Shipped')
+                            <div class="form-group row" id="status-field">
+                                <label id="status-label" for="status-input" class="col-md-12">Having Problems?</label>
+                                <input type="text" id="status-input" name="status" value="Shipped-Problematic" hidden>
+                            </div>
+                            @break
+                            @case('Shipped-Problematic')
+                            <p id="support-message">Processing your Support Request</p>
+                        @endswitch
                     </div>
-                    <div class="col-md-2 justify-content-center" style="display: flex;">
-                        <button class="btn btn-primary">Update Status</button>
-                    </div>
-
-            </div>
+                    @if($order->status != 'Shipped' and $order->status != 'Shipped-Problematic')
+                        <div class="col-md-2 justify-content-center" style="display: flex;">
+                            <button class="btn btn-primary">Update Status</button>
+                        </div>
+                    @else
+                        <div class="col-md-2 justify-content-center" style="display: flex;">
+                            <button class="btn btn-primary">Contact Support</button>
+                        </div>
+                    @endif
+                </div>
             </form>
         </div>
         <div class="col-md-3" id="shipping-card">
             <p id="shipping-title">Shipping Details</p>
-{{--            TODO: Shipping factory--}}
+            {{--            TODO: Shipping factory--}}
             <p class="shipping-details">Address: <br><span
                     id="address">Lorem Ipsum asdkasdklasbdlkbaslkdbaslbdasa</span></p>
             <p class="shipping-details">Status: </p>
         </div>
-
     </div>
 
     @foreach($order->products as $product)
@@ -86,11 +111,17 @@ setlocale(LC_MONETARY, 'en_US');
             </div>
         </div>
     @endforeach
-{{--    TODO: Complete order form action--}}
+    {{--    TODO: Complete order form action--}}
     <form>
-    <div class="row justify-content-center" style="display: flex; margin-bottom: 10px;">
-        <button class="btn btn-primary" id="proceed-button">Complete Order</button>
-    </div>
+        <div class="row justify-content-center" style="display: flex; margin-bottom: 10px;">
+            @if($order->status != 'Shipped')
+                <button class="btn btn-primary" id="proceed-button" style="background-color: #bbbbbb" disabled>Complete
+                    Order
+                </button>
+            @else
+                <button class="btn btn-primary" id="proceed-button">Complete Order</button>
+            @endif
+        </div>
     </form>
 @endsection
 
@@ -100,12 +131,14 @@ setlocale(LC_MONETARY, 'en_US');
         @case('Newly Created')
         updateStatusColor('#0088ff');
         @break
-        @case('Shipping')
-        updateStatusColor('#FFA500')
+        @case('Processed')
+        updateStatusColor('#FFA500');
+        @break
+        @case('Shipped')
+        updateStatusColor('yellow');
         @break
         @case('Completed')
-        updateStatusColor('#00ff48')
-        @break
+        updateStatusColor('#3abf1f');
         @endswitch
 
         function updateStatusColor(color) {

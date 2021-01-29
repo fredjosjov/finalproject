@@ -12,24 +12,24 @@ setlocale(LC_MONETARY, 'en_US');
     <div class="row justify-content-center">
         <div class="col-md-3 justify-content-center" style="display: flex;">
             <div class="card text-center" style="width: 20rem;">
-                <div class="card-body">
-                    <h2 class="card-title">Products Listed</h2>
+                <div class="card-body main-cards">
+                    <h2 class="card-title main-card-title">Products Listed</h2>
                     <h3 class="card-text">{{ $products->count() }}</h3>
                 </div>
             </div>
         </div>
         <div class="col-md-3 justify-content-center" style="display: flex;">
             <div class="card text-center" style="width: 20rem;">
-                <div class="card-body">
-                    <h2 class="card-title">Total Sales</h2>
+                <div class="card-body main-cards">
+                    <h2 class="card-title main-card-title">Total Sales</h2>
                     <h3 class="card-text">{{ money_format('%i',$revenue)}}</h3>
                 </div>
             </div>
         </div>
         <div class="col-md-3 justify-content-center" style="display: flex;">
             <div class="card text-center" style="width: 20rem;">
-                <div class="card-body">
-                    <h2 class="card-title">Completed Orders</h2>
+                <div class="card-body main-cards">
+                    <h2 class="card-title main-card-title">Completed Orders</h2>
                     <h3 class="card-text">{{ $orders->count() }}</h3>
                 </div>
             </div>
