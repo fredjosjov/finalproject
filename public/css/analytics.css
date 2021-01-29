@@ -15,10 +15,90 @@ h1 {
     margin-right: 10px;
 }
 
-#store-back-btn{
+#store-back-btn {
     margin-top: 5px;
 }
 
-#chart-title{
+#chart-title {
     margin-top: 20px;
 }
+
+#title-divider {
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+#order-status-tag {
+    margin-bottom: 0;
+    margin-left: 20px;
+    padding-top: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    border-style: solid;
+    /*border-color: orange;*/
+    /*color: #ffa500;*/
+    border-radius: 4px;
+}
+
+.order-product-info {
+    border: 2px solid #bbbbbb;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.products-info {
+    padding-left: 20px;
+}
+
+#total-value-info {
+    padding-right: 20px;
+}
+
+#product-name {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #bbbbbb;
+}
+
+#shipping-card {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#shipping-title {
+    background: #bbbbbb;
+    border-radius: 8px;
+    font-size: x-large;
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding-left: 10px;
+}
+
+.summary-details, .shipping-details{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 0;
+    border-left: 5px solid #bbbbbb;
+    padding-left: 5px;
+}
+
+#proceed-button {
+    font-size: 24px;
+    padding: 5px 50px 5px 50px;
+}
+
+#total-value {
+    border-bottom: double;
+}
+
+#address {
+    font-weight: normal;
+    font-size: 16px;
+}
+
+
+
+
