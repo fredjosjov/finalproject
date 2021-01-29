@@ -7,8 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     protected $table = "carts";
-    // protected $fillable = ['customerId','productId','storeId','quantity','price'];
     public $timestamps = false;
+    protected $primaryKey = 'id';
 
-    protected $primaryKey = 'cart_id';
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
+
+    public function store(){
+        return $this->belongsTo(Store::class);
+    }
 }

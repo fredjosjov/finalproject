@@ -53,15 +53,9 @@ class HistoryController extends Controller
     public function show(Request $request)
     {
         $id = $request->orderId;
-//        $orderDetails = \App\Models\OrderDetails::where('order_id', $request->orderId)
-//                        ->join('products', 'products.id', '=', 'order_details.product_id')
-//                        ->get();
-
         $order = Order::where('id', $id)->get()->first();
-        // dd($order);
         $products = $order->products;
         
-        //        return view('history.detail', compact('orderDetails'));
         return view('history.detail', [
             'order' => $order,
             'products' => $products

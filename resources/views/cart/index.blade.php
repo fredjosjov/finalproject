@@ -13,15 +13,15 @@
     @foreach( $cart as $carts )
         <div class="card mt-2 mb-2">
             <div class="card-header">
-                {{$carts->store_name}}
+                {{$carts->store->store_name}}
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{$carts->name}}</h5>
-                <p class="card-text">{{$carts->description}}</p>
+                <h5 class="card-title">{{$carts->product->name}}</h5>
+                <p class="card-text">{{$carts->product->description}}</p>
                 <div class="row">
 
                     <div class="col-sm-2">
-                        <form action="/cart/{{$carts->cart_id}}" method="post">
+                        <form action="/cart/{{$carts->id}}" method="post">
                         @method('delete')
                         @csrf
                             <button class="btn btn-danger">Remove</button>
@@ -34,15 +34,15 @@
                                 Quantity:
                                 <form action="/minusQty" method="post">
                                 @csrf
-                                    <input type="text" name="id" id="id" value="{{$carts->cart_id}}" style="display: none">
-                                    <input type="text" name="quantity" id="quantity" value="{{$carts->cart_quantity}}" style="display: none">
+                                    <input type="text" name="id" id="id" value="{{$carts->id}}" style="display: none">
+                                    <input type="text" name="quantity" id="quantity" value="{{$carts->quantity}}" style="display: none">
                                     <button type="submit" class="btn btn-outline-secondary">-</button>
                                 </form>
-                                <button type="button" class="btn btn-outline-secondary" disabled>{{$carts->cart_quantity}}</button>
+                                <button type="button" class="btn btn-outline-secondary" disabled>{{$carts->quantity}}</button>
                                 <form action="/addQty" method="post">
                                 @csrf
-                                    <input type="text" name="id" id="id" value="{{$carts->cart_id}}" style="display: none">
-                                    <input type="text" name="quantity" id="quantity" value="{{$carts->cart_quantity}}" style="display: none">
+                                    <input type="text" name="id" id="id" value="{{$carts->id}}" style="display: none">
+                                    <input type="text" name="quantity" id="quantity" value="{{$carts->quantity}}" style="display: none">
                                     <button type="submit" class="btn btn-outline-secondary">+</button>
                                 </form>
                             </div>

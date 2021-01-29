@@ -17,14 +17,4 @@ class ProductController extends Controller
             return redirect('/');
         }
     }
-
-    public function addToCart(Request $request)
-    {
-        return $request;
-    }
-
-    public function show(Product $product)
-    {
-        return $product;
-    }
 }
