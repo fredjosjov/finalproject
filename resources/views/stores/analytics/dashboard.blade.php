@@ -1,4 +1,7 @@
-@extends('stores.analytics.layout')
+<?php
+setlocale(LC_MONETARY, 'en_US');
+?>
+@extends('stores.layout')
 
 @section('title')
     <h1>{{ ucfirst($store->name) }}'s Store</h1>
@@ -7,35 +10,29 @@
 @section('content')
     <h1>Dashboard</h1>
     <div class="row justify-content-center">
-        <div class="col-md-3">
-            <div class="row justify-content-center">
-                <div class="card text-center" style="width: 20rem;">
-                    <div class="card-body">
-                        <h2 class="card-title">Products Listed</h2>
-                        <h3 class="card-text">{{ $products->count() }}</h3>
-                    </div>
+        <div class="col-md-3 justify-content-center" style="display: flex;">
+            <div class="card text-center" style="width: 20rem;">
+                <div class="card-body">
+                    <h2 class="card-title">Products Listed</h2>
+                    <h3 class="card-text">{{ $products->count() }}</h3>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 justify-content-center" style="display: flex;">
             <div class="card text-center" style="width: 20rem;">
                 <div class="card-body">
                     <h2 class="card-title">Total Sales</h2>
-                    <h3 class="card-text">{{ $revenue }}</h3>
+                    <h3 class="card-text">{{ money_format('%i',$revenue)}}</h3>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 justify-content-center" style="display: flex;">
             <div class="card text-center" style="width: 20rem;">
                 <div class="card-body">
                     <h2 class="card-title">Completed Orders</h2>
                     <h3 class="card-text">{{ $orders->count() }}</h3>
                 </div>
             </div>
-{{--            <div class="row justify-content-center">--}}
-{{--                <h2>Completed Orders</h2>--}}
-{{--            </div>--}}
-{{--            <div class="row justify-content-center">{{ $orders->count() }}</div>--}}
         </div>
     </div>
     <div class="row justify-content-center">
@@ -50,7 +47,7 @@
         </div>
     </div>
     <div class="row">
-        <h2>Most Recent Activity</h2>
+        <h2>Most Recent Orders</h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -61,37 +58,28 @@
                     <th scope="col">Date</th>
                 </tr>
                 </thead>
+
                 <tbody>
-{{--                <tr>--}}
-{{--                    <th scope="row">No recent activity.</th>--}}
-{{--                    <td></td>--}}
-{{--                </tr>--}}
-{{--                </tbody>--}}
-                <tbody>
-                <tr>
-                    <th scope="row">Lorem Ipsum</th>
-                    <td>January 26</td>
-                </tr>
-                <tr>
-                    <th scope="row">Lorem Ipsum</th>
-                    <td>January 26</td>
-                </tr>
-                <tr>
-                    <th scope="row">Lorem Ipsum</th>
-                    <td>January 26</td>
-                </tr>
-                <tr>
-                    <th scope="row">Lorem Ipsum</th>
-                    <td>January 26</td>
-                </tr>
-                <tr>
-                    <th scope="row">Lorem Ipsum</th>
-                    <td>January 26</td>
-                </tr>
+                @if(count($activities) === null)
+                    <tr>
+                        <th scope="row">No recent activity.</th>
+                        <td></td>
+                    </tr>
+                @else
+                    @foreach($activities as $activity)
+                        <tr>
+                            <th scope="row"><a
+                                    href="customers/{{ $activity->customer_id }}">{{ $activity->customer->firstName }} {{ $activity->customer->lastName }}</a>
+                                placed an <a href="/store/{{ $store->id }}/order/{{ $activity->id }}">order</a> worth
+                                of {{ money_format('%i' , $activity->totalAmount) }}.
+                            </th>
+                            <td>{{ $activity->created_at->format('F d H:i:s') }}</td>
+                        </tr>
+                    @endforeach
+                @endif
                 </tbody>
             </table>
         </div>
-        {{--should be a table that list all of the most recent activity in the store--}}
     </div>
 
 @endsection
@@ -101,22 +89,21 @@
     <script type="text/javascript">
         google.charts.load('current', {'packages': ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
-        //TODO: create an automatically filling array
-        var dates = [];
-        var sales = [];
+
+        var dataMapping = new Map([
+            ['Date', 'Sales']
+        ]);
+
         @foreach($orders as $order)
-        dates.push("{{ $order->created_at->format('F d') }}");
-        sales.push({{ $order->totalAmount }})
+        if (!dataMapping.has("{{ $order->created_at->format('F d') }}")) {
+            dataMapping.set("{{ $order->created_at->format('F d') }}", {{ $order->totalAmount }});
+        } else {
+            dataMapping.set("{{ $order->created_at->format('F d') }}", dataMapping.get("{{ $order->created_at->format('F d') }}") + {{ $order->totalAmount }});
+        }
         @endforeach
+
         function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Date', 'Sales'],
-                [dates[0], sales[0]],
-                [dates[1], sales[1]],
-                [dates[2], sales[2]],
-                [dates[3], sales[3]],
-                [dates[4], sales[4]]
-            ]);
+            var data = google.visualization.arrayToDataTable(Array.from(dataMapping));
 
             var options = {
                 legend: {
@@ -130,9 +117,13 @@
                 height: 500
             };
 
-            var chart = new google.visualization.LineChart(document.getElementById('sales-trend'));
+            if (Array.from(dataMapping).length === 2) {
+                document.getElementById('sales-trend').innerHTML = "<h5 style=\"text-align: center;\">Not enough data to display results.</h5>"
+            } else {
+                var chart = new google.visualization.LineChart(document.getElementById('sales-trend'));
 
-            chart.draw(data, options);
+                chart.draw(data, options);
+            }
         }
     </script>
 @endsection
