@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    protected $table = "customers";
+    protected $fillable = ['firstName','lastName','phone','address'];
+
+    protected $primaryKey = 'id';
+
     use HasFactory;
 
     public function account(){

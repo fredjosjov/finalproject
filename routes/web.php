@@ -13,6 +13,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+//Route::get('/checkout',[CheckoutController::class, 'index']); //laravel 8
+
+Route::get('/', 'App\Http\Controllers\LoginController@index');
+Route::post('/login', 'App\Http\Controllers\loginController@login');
+Route::get('/logout', 'App\Http\Controllers\loginController@logout');
+
+Route::get('/product', 'App\Http\Controllers\productController@index');
+
+Route::get('/cart', 'App\Http\Controllers\cartController@index');
+Route::post('/cart', 'App\Http\Controllers\cartController@store');
+Route::delete('/cart/{cart}', 'App\Http\Controllers\cartController@destroy');
+Route::post('/minusQty', 'App\Http\Controllers\cartController@minusQty');
+Route::post('/addQty', 'App\Http\Controllers\cartController@addQty');
+
+Route::get('/history', 'App\Http\Controllers\historyController@index');
+Route::post('/detail', 'App\Http\Controllers\historyController@show');
+
+Route::get('/checkout', 'App\Http\Controllers\CheckoutController@index');
+Route::post('/checkout/payment', 'App\Http\Controllers\CheckoutController@payment');
+
+Route::get('/edit-profile/{id}', 'App\Http\Controllers\CustomerController@edit');
+Route::post('/edit-profile/update/{id}', 'App\Http\Controllers\CustomerController@update');
+
+Route::get('/shipping', 'App\Http\Controllers\ShippingController@index');
+Route::get('/wishlist', 'App\Http\Controllers\WishlistController@index');
+
+Route::get('/store/{store}/analytics', 'App\Http\Controllers\StoreController@stats');
+Route::get('/store/{store}/order/{id}', 'App\Http\Controllers\OrderController@show');
+Route::put('/store/{store}/order/{id}/update', 'App\Http\Controllers\OrderController@update')->name('order-status.update');

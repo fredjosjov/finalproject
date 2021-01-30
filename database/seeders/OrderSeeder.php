@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use \App\Models\Order;
+use \App\Models\Store;
 use Illuminate\Support\Facades\DB;
 
 class OrderSeeder extends Seeder
@@ -14,19 +16,27 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Order::factory()->create();
-        $store = \App\Models\Seller::get()->random(1)->first()->store;
-        $products = $store->products->random(random_int(1, count($store->products)));
-        $order = \App\Models\Order::get()->last();
+        Order::factory()->create();
+        $order = Order::get()->last();
+        $store = Store::get()->where('id', $order->store_id);
         $totalAmount = 0;
-        foreach ($products as $product) {
-            $quantity = random_int(0, 10);
-            $totalProductPrice = $product->price * $quantity;
+        $products = $store->first()->products;
+
+        foreach($products as $product){
+            $quantity = random_int(1,10);
             DB::table('order_details')->insertOrIgnore([
-                ['order_id' => $order->id, 'product_id' => $product->id, 'quantity' => $quantity, 'price' => $totalProductPrice]
+                [
+                    'order_id' => $order->id,
+                    'product_id' => $product->id,
+                    'quantity' => $quantity,
+                    'price' => $product->price
+                ]
             ]);
+            $totalProductPrice = $product->price * $quantity;
             $totalAmount += $totalProductPrice;
         }
-        DB::table('orders')->where('id', $order->id)->update(['totalAmount' => $totalAmount]);
+        DB::table('orders')->where('id', $order->id)->update([
+            'totalAmount' => $totalAmount
+        ]);
     }
 }
