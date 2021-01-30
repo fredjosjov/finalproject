@@ -33,7 +33,8 @@ setlocale(LC_MONETARY, 'en_US');
                         </p>
                         @break
                         @case('Processed')
-                        <p id="confirmation-message">Order status will be updated to Shipped.<br> Make sure that
+                        <p id="confirmation-message">The order will be <span class="confirmation-warning">Shipped.</span><br>
+                            Make sure that
                             the you already ship the items and the proof of shipment is documentation is ready. <br>
                             <span
                                 class="confirmation-warning">Once updated, reverting will require support from us.</span><br>
@@ -41,6 +42,14 @@ setlocale(LC_MONETARY, 'en_US');
                             For inquiries and support, kindly contact admin at support@fredjosjov.com.
                         </p>
                         @break
+                        @case('Shipped')
+                        <p id="confirmation-message">The order will be <span class="confirmation-warning">Completed.</span><br>
+                            Only complete the order when the customer has received the item(s).<br>
+                            <span
+                                class="confirmation-warning">Once updated, reverting will require support from us.</span><br>
+                            <br>
+                            For inquiries and support, kindly contact admin at support@fredjosjov.com.
+                        </p>
                     @endswitch
                 </div>
                 <div class="modal-footer">
@@ -54,6 +63,9 @@ setlocale(LC_MONETARY, 'en_US');
                             @break
                             @case('Processed')
                             <input name="status" type="text" value="Shipped" hidden>
+                            @break
+                            @case('Shipped')
+                            <input name="status" type="text" value="Completed" hidden>
                             @break
                         @endswitch
                         <button type="button" class="btn btn-primary" onclick="submit('update-order-status');">Confirm
@@ -175,12 +187,18 @@ setlocale(LC_MONETARY, 'en_US');
     {{--    TODO: Complete order form action--}}
     <form>
         <div class="row justify-content-center" style="display: flex; margin-bottom: 10px;">
-            @if($order->status != 'Shipped')
+            @if($order->status != 'Shipped' and $order->status != 'Completed')
                 <button class="btn btn-primary" id="proceed-button" style="background-color: #bbbbbb" disabled>Complete
                     Order
                 </button>
+            @elseif($order->status === 'Completed')
+                <h4 id="complete-message">This order has been completed on {{ $order->updated_at->format('F d H:i:s') }}</h4>
             @else
-                <button class="btn btn-primary" id="proceed-button">Complete Order</button>
+{{--                <button class="btn btn-primary" id="proceed-button">Complete Order</button>--}}
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#confirmation-message-modal" id="proceed-button">
+                    Complete Order
+                </button>
             @endif
         </div>
     </form>
