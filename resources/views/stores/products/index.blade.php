@@ -30,17 +30,19 @@
                 <tbody>
                 <?php $GLOBALS['active-count'] = 1;?>
                 @foreach($activeListing as $item)
-                        <tr>
-                            <th scope="row"><?php echo $GLOBALS['active-count']++;?></th>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->description }}</td>
-                            <td>{{ $item->quantity }}</td>
-                            <td><input type="text" name="new-price" placeholder="{{ $item->price }}"></td>
-                            <td style="text-align: center;"><a href="{{ URL('/store/' .  $store->id . '/products/remove/' . $item->id) }}"><img class="small-icons"
-                                                                             src="{{ asset('/icons/remove-icon.svg') }}"></a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <th scope="row"><?php echo $GLOBALS['active-count']++;?></th>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->description }}</td>
+                        <td>{{ $item->quantity }}</td>
+                        <td><input type="text" name="new-price" placeholder="{{ $item->price }}"></td>
+                        <td style="text-align: center;"><a
+                                href="{{ URL('/store/' .  $store->id . '/products/remove/' . $item->id) }}"><img
+                                    class="small-icons"
+                                    src="{{ asset('/icons/remove-icon.svg') }}"></a>
+                        </td>
+                    </tr>
                 @endforeach
                 </tbody>
             </table>
@@ -87,8 +89,14 @@
                     <td>{{ $product->description }}</td>
                     <td>{{ $product->quantity }}</td>
                     <td>{{ $product->price }}</td>
-                    <td style="text-align: center;"><a href="#"><img class="small-icons" src="{{ asset('/icons/add-icon.svg') }}"></a><a href="#"><img class="small-icons"
-                                                                     src="{{ asset('/icons/edit-icon.svg') }}"></a><a
+                    <td style="text-align: center;">
+                        @if($product->is_active === 0)
+                        <a href="{{ url('/store/' . $store->id . '/products/add/' . $product->id) }}"><img class="small-icons"
+                                                                     src="{{ asset('/icons/add-icon.svg') }}"></a>
+                        @endif
+                        <a
+                            href="#"><img class="small-icons"
+                                          src="{{ asset('/icons/edit-icon.svg') }}"></a><a
                             href="#"><img class="small-icons" src="{{ asset('/icons/clear-icon.svg') }}"></a></td>
                 </tr>
             @endforeach
@@ -100,7 +108,7 @@
             <a href="/store/{{ $store->id }}/create-product" id="create-product">Create a New Product</a>
         </div>
         <div class="col-md-4 justify-content-center" style="display: flex;">
-{{--            //TODO: (Optional) Pagination--}}
+            {{--            //TODO: (Optional) Pagination--}}
         </div>
         <div class="col-md-4 justify-content-end" style="display: flex;">
 

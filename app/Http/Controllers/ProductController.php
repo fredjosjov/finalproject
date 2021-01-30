@@ -29,9 +29,17 @@ class ProductController extends Controller
         ]);
     }
 
-    public function removeFromListing(string $store, string $id){
+    public function editListingItem(string $store, string $mode, string $id)
+    {
         $product = Product::find($id);
-        $product->is_active = false;
+        switch($mode){
+            case('remove'):
+                $product->is_active = false;
+                break;
+            case('add'):
+                $product->is_active = true;
+                break;
+        }
         $product->save();
         return redirect('/store/' . $store . '/products');
     }
