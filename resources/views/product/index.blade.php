@@ -4,11 +4,7 @@
 
 @section('container')
 
-<div class="container">
-    <!-- this needs to link to profile -->
-    Account: <a class="" href="#"><?= session('custName') ?></a>
-</div>
-
+@section('heading', 'Product Page')
 <div class="container mt-2 mb-4">
     <div class="row">
         @foreach( $product as $products )
