@@ -23,7 +23,7 @@ class ProductController extends Controller
         $store = Store::find($id);
         return view('stores.products.index', [
             'store' => $store,
-            'activeListing' => $store->products->where('is_active', 1),
+            'activeListing' => $store->products->where('is_active', $id),
             'products' => $store->products
         ]);
     }
