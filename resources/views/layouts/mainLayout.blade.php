@@ -28,6 +28,18 @@
             </div>
         </nav>
         
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-sm-10">
+                    <h2>@yield('heading')</h2>
+                </div>
+                <div class="col">
+                    Account: <a class="" href="/edit-profile/<?= session('custId') ?>"><?= session('custName') ?></a>
+                </div>
+            </div>
+            <!-- this needs to link to profile -->
+        </div>
+        
         @yield('container')
 
         <!-- Optional JavaScript; choose one of the two! -->

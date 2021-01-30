@@ -4,10 +4,7 @@
 
 @section('container')
 
-<div class="container">
-    <!-- this needs to link to profile -->
-    Account: <a class="" href="#"><?= session('custName') ?></a>
-</div>
+@section('heading', 'History Page')
 
 <div class="container mt-3">
     <div style="width: 40rem;">

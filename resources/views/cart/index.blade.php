@@ -4,10 +4,7 @@
 
 @section('container')
 
-<div class="container">
-    <!-- this needs to link to profile -->
-    Account: <a class="" href="#"><?= session('custName') ?></a>
-</div>
+@section('heading', 'Shopping Cart')
 
 <div class="container mt-3 mb-4">
     @foreach( $cart as $carts )
