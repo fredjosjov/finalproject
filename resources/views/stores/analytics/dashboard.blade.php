@@ -9,6 +9,7 @@ setlocale(LC_MONETARY, 'en_US');
 
 @section('content')
     <h1>Dashboard</h1>
+    <hr class="solid" style="border: 2px solid #818181">
     <div class="row justify-content-center">
         <div class="col-md-3 justify-content-center" style="display: flex;">
             <div class="card text-center" style="width: 20rem;">
@@ -35,6 +36,7 @@ setlocale(LC_MONETARY, 'en_US');
             </div>
         </div>
     </div>
+    <hr class="solid" style="border: 1px solid #bbbbbb">
     <div class="row justify-content-center">
         <h2 id="chart-title">Store Performance</h2>
     </div>
@@ -46,6 +48,7 @@ setlocale(LC_MONETARY, 'en_US');
             <div id="sales-trend"></div>
         </div>
     </div>
+    <hr class="solid" style="border: 1px solid #bbbbbb">
     <div class="row">
         <h2>Most Recent Orders</h2>
     </div>
