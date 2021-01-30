@@ -24,7 +24,7 @@ class OrderController extends Controller
     }
 
     public function update(Store $store, int $id, Request $request){
-        $order = Order::find(2);
+        $order = Order::find($id);
         $order->status = $request->status;
         $order->save();
         return view('stores.orders.show', [
