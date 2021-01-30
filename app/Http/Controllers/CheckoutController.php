@@ -68,7 +68,7 @@ class CheckoutController extends Controller
 
 			//shipping
 			$shipping = Shipping::create([
-				'method' => "Debit",
+				'method' => "Regular",
 				'vendor' => $request->vendor,
 				'expectedDuration' => Carbon::now()->addDays(2)->format('Y-m-d h:i:s'),
 			]);
