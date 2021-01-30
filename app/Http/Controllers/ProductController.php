@@ -32,7 +32,7 @@ class ProductController extends Controller
     public function editListingItem(string $store, string $mode, string $id)
     {
         $product = Product::find($id);
-        switch($mode){
+        switch ($mode) {
             case('remove'):
                 $product->is_active = false;
                 break;
@@ -42,5 +42,25 @@ class ProductController extends Controller
         }
         $product->save();
         return redirect('/store/' . $store . '/products');
+    }
+
+    public function updateListingPrices(string $store, Request $request)
+    {
+        $inputArray = $request->input();
+        unset($inputArray['_token']);
+        unset($inputArray['_method']);
+
+        //TODO: Required validations
+        foreach($inputArray as $id => $newPrice){
+            $product = Product::find(intval($id));
+            $product->price = floatval($newPrice);
+            $product->save();
+        }
+        return redirect('/store/' . $store . '/products');
+    }
+
+    public function validatePriceInput(array $input): array
+    {
+
     }
 }

@@ -51,3 +51,4 @@ Route::get('/store/{store}/order/{id}', 'App\Http\Controllers\OrderController@sh
 Route::put('/store/{store}/order/{id}/update', 'App\Http\Controllers\OrderController@update')->name('order-status.update');
 Route::get('/store/{store}/products', '\App\Http\Controllers\ProductController@indexStore');
 Route::get('/store/{store}/products/{mode}/{id}', '\App\Http\Controllers\ProductController@editListingItem');
+Route::put('/store/{store}/products/update-price', '\App\Http\Controllers\ProductController@updateListingPrices')->name('store-products.update-price');

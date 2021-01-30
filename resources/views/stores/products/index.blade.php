@@ -9,7 +9,9 @@
         <h1>Manage Inventory</h1>
     </div>
     <hr class="solid" style="border: 2px solid #818181; margin: 4px 0 8px 0;">
-    <form>
+    <form method="POST" action="{{ route('store-products.update-price', ['store' => $store]) }}">
+        @csrf
+        @method('PUT')
         <div class="row justify-content-between" style="display: flex;">
             <h2>Active Listings</h2>
         </div>
@@ -36,7 +38,8 @@
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->description }}</td>
                         <td>{{ $item->quantity }}</td>
-                        <td><input type="text" name="new-price" placeholder="{{ $item->price }}"></td>
+                        <td><input type="text" name="{{ $item->id }}" placeholder="{{ $item->price }}"
+                                   value="{{ $item->price }}"></td>
                         <td style="text-align: center;"><a
                                 href="{{ URL('/store/' .  $store->id . '/products/remove/' . $item->id) }}"><img
                                     class="small-icons"
@@ -55,7 +58,7 @@
                 {{--            //TODO: (Optional) Pagination--}}
             </div>
             <div class="col-md-4 justify-content-end" style="display: flex;">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productsModal">
+                <button type="submit" class="btn btn-primary">
                     Update Prices
                 </button>
             </div>
@@ -91,8 +94,9 @@
                     <td>{{ $product->price }}</td>
                     <td style="text-align: center;">
                         @if($product->is_active === 0)
-                        <a href="{{ url('/store/' . $store->id . '/products/add/' . $product->id) }}"><img class="small-icons"
-                                                                     src="{{ asset('/icons/add-icon.svg') }}"></a>
+                            <a href="{{ url('/store/' . $store->id . '/products/add/' . $product->id) }}"><img
+                                    class="small-icons"
+                                    src="{{ asset('/icons/add-icon.svg') }}"></a>
                         @endif
                         <a
                             href="#"><img class="small-icons"
