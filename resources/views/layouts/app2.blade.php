@@ -23,6 +23,7 @@
     <script src="{{ asset('plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('plugins/bower_components/toastr/toastr.min.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/bower_components/toastr/toastr.min.css') }}">
+     <link href="{{ asset('plugins/bower_components/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
