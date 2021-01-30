@@ -20,7 +20,7 @@
             <a class="nav-link active justify-content-center" href="{{ URL('store/'. $store->id . '/analytics') }}">Dashboard</a>
             <a class="nav-link active" href="#">Store</a>
             <a class="nav-link active" href="#">Customers</a>
-            <a class="nav-link active" href="#">Products</a>
+            <a class="nav-link active" href="{{ URL('store/' . $store->id . '/products') }}">Products</a>
             <a class="nav-link active" href="#">Orders</a>
         </nav>
 
