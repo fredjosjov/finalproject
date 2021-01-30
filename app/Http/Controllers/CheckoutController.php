@@ -13,6 +13,8 @@ use App\Models\OrderDetails;
 use App\Models\Shipping;
 use App\Models\ShippingDetails;
 use App\Models\Invoice;
+use App\Models\Cards;
+
 
 class CheckoutController extends Controller
 {
@@ -61,7 +63,7 @@ class CheckoutController extends Controller
 					'quantity' => $item->quantity,
 					'price' => $item->price
 				]);
-				$updatedCart =  Cart::find($item->id);
+				$updatedCart = Cart::find($item->id);
 				$updatedCart->isOrder = 1;
 				$updatedCart->save();
 			};
@@ -83,6 +85,11 @@ class CheckoutController extends Controller
 				]);
 			};
 
+			//cards
+			Cards::create([
+				'card_number' => $request->card_number,
+				'type' => "Debit",
+			]);
 
 			//invoice
 			$invoice = Invoice::create([
@@ -97,7 +104,7 @@ class CheckoutController extends Controller
 				'invoice_id' => $invoice->id,
 				'card_number' => $request->card_number,
 				'date' => Carbon::now()->format('Y-m-d'),
-				'charge_amount' => $request->charge_amount,
+				'charge_amount' => $cart->sum('price'),
 			]);
 
 			$notification = array(
