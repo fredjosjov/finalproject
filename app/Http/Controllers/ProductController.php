@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Store;
 
 class ProductController extends Controller
 {
@@ -16,5 +17,13 @@ class ProductController extends Controller
         }else{
             return redirect('/');
         }
+    }
+
+    public function indexStore(string $id){
+        $store = Store::find($id);
+        return view('stores.products.index', [
+            'store' => $store,
+            'products' => $store->products
+        ]);
     }
 }

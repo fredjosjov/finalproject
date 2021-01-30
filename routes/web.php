@@ -40,7 +40,13 @@ Route::get('/edit-profile/{id}', 'App\Http\Controllers\CustomerController@edit')
 Route::post('/edit-profile/update/{id}', 'App\Http\Controllers\CustomerController@update');
 
 Route::get('/shipping', 'App\Http\Controllers\ShippingController@index');
+Route::get('/shipping/changeStatus/{id}/{product_id}/{orders_id}', 'App\Http\Controllers\ShippingController@changeStatus');
+Route::post('/shipping/saveFeedback', 'App\Http\Controllers\ShippingController@saveFeedback');
+
 Route::get('/wishlist', 'App\Http\Controllers\WishlistController@index');
+Route::post('/wishlist/addWishlist/{id}', 'App\Http\Controllers\WishlistController@addWishlist');
 
 Route::get('/store/{store}/analytics', 'App\Http\Controllers\StoreController@stats');
 Route::get('/store/{store}/order/{id}', 'App\Http\Controllers\OrderController@show');
+Route::put('/store/{store}/order/{id}/update', 'App\Http\Controllers\OrderController@update')->name('order-status.update');
+Route::get('/store/{store}/products', '\App\Http\Controllers\ProductController@indexStore');

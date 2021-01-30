@@ -61,10 +61,20 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12">
+                                <div class="col-xs-6">
                                     <div class="form-group">
-                                        <label>Charge Amount</label>
-                                        <input type="number" class="form-control" name="charge_amount" placeholder="Charge Amount">
+                                        <label>Address</label>
+                                        <textarea class="form-control" name="ship_address" placeholder="Address" rows="4" cols="50"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label>Courier</label>
+                                        <select class="form-control" name="vendor">
+                                            <option value="JNE">JNE</option>
+                                            <option value="TIKI">TIKI</option>
+                                            <option value="Pos Indonesia">Pos Indonesia</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

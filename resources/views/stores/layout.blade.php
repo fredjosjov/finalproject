@@ -12,14 +12,15 @@
     <title>Store Management</title>
 </head>
 <body>
+@yield('modal')
 <div class="row">
     <div class="analytics col-md-2" id="analytics-navigation">
         @yield('title')
         <nav class="nav flex-column">
-            <a class="nav-link active justify-content-center" href="#">Dashboard</a>
+            <a class="nav-link active justify-content-center" href="{{ URL('store/'. $store->id . '/analytics') }}">Dashboard</a>
             <a class="nav-link active" href="#">Store</a>
             <a class="nav-link active" href="#">Customers</a>
-            <a class="nav-link active" href="#">Products</a>
+            <a class="nav-link active" href="{{ URL('store/' . $store->id . '/products') }}">Products</a>
             <a class="nav-link active" href="#">Orders</a>
         </nav>
 
@@ -33,5 +34,5 @@
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <script src="{{ asset('/js/bootstrap.bundle.min.js') }}"></script>
-@yield('charts')
+@yield('js-script')
 </html>
