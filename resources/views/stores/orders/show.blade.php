@@ -8,7 +8,62 @@ setlocale(LC_MONETARY, 'en_US');
 @endsection
 
 @section('modal')
+    <div class="modal" tabindex="-1" role="dialog" id="confirmation-message-modal">
 
+        @csrf
+        @method('PUT')
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Order Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @switch($order->status)
+                        @case('Newly Created')
+                        <p id="confirmation-message">Order status will be updated to <span
+                                class="confirmation-warning">Processed. </span><br> Make sure that
+                            the you are ready to ship the items and the details of the products are correct. <br>
+                            <span
+                                class="confirmation-warning">Once updated, reverting will require support from us.</span><br>
+                            <br>
+                            For inquiries and support, kindly contact admin at support@fredjosjov.com.
+                        </p>
+                        @break
+                        @case('Processed')
+                        <p id="confirmation-message">Order status will be updated to Shipped.<br> Make sure that
+                            the you already ship the items and the proof of shipment is documentation is ready. <br>
+                            <span
+                                class="confirmation-warning">Once updated, reverting will require support from us.</span><br>
+                            <br>
+                            For inquiries and support, kindly contact admin at support@fredjosjov.com.
+                        </p>
+                        @break
+                    @endswitch
+                </div>
+                <div class="modal-footer">
+                    <form id="update-order-status" method="post"
+                          action="{{ route('order-status.update', ['store'=> $store, 'id' => $order->id]) }}">
+                        @csrf
+                        @method('PUT')
+                        @switch($order->status)
+                            @case('Newly Created')
+                            <input name="status" type="text" value="Processed" hidden>
+                            @break
+                            @case('Processed')
+                            <input name="status" type="text" value="Shipped" hidden>
+                            @break
+                        @endswitch
+                        <button type="button" class="btn btn-primary" onclick="submit('update-order-status');">Confirm
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('title')
@@ -26,7 +81,8 @@ setlocale(LC_MONETARY, 'en_US');
             <div class="row" style="margin-bottom: 10px;">
                 <div class="col-md-4 justify-content-start" style="display: flex;">
                     <p class="summary-details">Customer
-                        : {{ $order->customer->firstName }} {{ $order->customer->lastName }} ({{ $order->customer_id }})</p>
+                        : {{ $order->customer->firstName }}
+                        {{ $order->customer->lastName }} ({{ $order->customer_id }})</p>
                 </div>
                 <div class="col-md-4 justify-content-center" style="display: flex;">
                     <p class="summary-details">Order Date : {{ $order->created_at }}</p>
@@ -36,49 +92,54 @@ setlocale(LC_MONETARY, 'en_US');
                             id="total-value">{{ money_format('%i', $order->totalAmount) }}</span></p>
                 </div>
             </div>
-            <form method="post" action="{{ route('order-status.update', ['store'=> $store, 'id' => $order->id]) }}">
-                @csrf
-                @method('PUT')
-                <div class="row" style="margin-bottom: 10px;">
-                    <div class="col-md-6">
-                    </div>
-                    <div class="col-md-4">
-                        @switch($order->status)
-                            @case('Newly Created')
-                            <div class="form-group row" id="status-field">
-                                <label id="status-label" for="status-input" class="col-md-12">Processed Your
-                                    Order?</label>
-                                <input type="text" id="status-input" name="status" value="Processed" hidden>
-                            </div>
-                            @break
-                            @case('Processed')
-                            <div class="form-group row" id="status-field">
-                                <label id="status-label" for="status-input" class="col-md-12">Shipped Your
-                                    Order?</label>
-                                <input type="text" id="status-input" name="status" value="Shipped" hidden>
-                            </div>
-                            @break
-                            @case('Shipped')
-                            <div class="form-group row" id="status-field">
-                                <label id="status-label" for="status-input" class="col-md-12">Having Problems?</label>
-                                <input type="text" id="status-input" name="status" value="Shipped-Problematic" hidden>
-                            </div>
-                            @break
-                            @case('Shipped-Problematic')
-                            <p id="support-message">Processing your Support Request</p>
-                        @endswitch
-                    </div>
-                    @if($order->status != 'Shipped' and $order->status != 'Shipped-Problematic')
-                        <div class="col-md-2 justify-content-center" style="display: flex;">
-                            <button class="btn btn-primary">Update Status</button>
-                        </div>
-                    @else
-                        <div class="col-md-2 justify-content-center" style="display: flex;">
-                            <button class="btn btn-primary">Contact Support</button>
-                        </div>
-                    @endif
+            {{--            <form method="post" action="{{ route('order-status.update', ['store'=> $store, 'id' => $order->id]) }}">--}}
+            {{--                @csrf--}}
+            {{--                @method('PUT')--}}
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-md-6">
                 </div>
-            </form>
+                <div class="col-md-4">
+                    @switch($order->status)
+                        @case('Newly Created')
+                        <div class="form-group row" id="status-field">
+                            <label id="status-label" for="status-input" class="col-md-12">Processed Your
+                                Order?</label>
+                            <input type="text" id="status-input" name="status" value="Processed" hidden>
+                        </div>
+                        @break
+                        @case('Processed')
+                        <div class="form-group row" id="status-field">
+                            <label id="status-label" for="status-input" class="col-md-12">Shipped Your
+                                Order?</label>
+                            <input type="text" id="status-input" name="status" value="Shipped" hidden>
+                        </div>
+                        @break
+                        @case('Shipped')
+                        <div class="form-group row" id="status-field">
+                            <label id="status-label" for="status-input" class="col-md-12">Having Problems?</label>
+                            <input type="text" id="status-input" name="status" value="Shipped-Problematic" hidden>
+                        </div>
+                        @break
+                        @case('Shipped-Problematic')
+                        <p id="support-message">Processing your Support Request</p>
+                    @endswitch
+                </div>
+                @if($order->status != 'Shipped' and $order->status != 'Shipped-Problematic')
+                    <div class="col-md-2 justify-content-center" style="display: flex;">
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#confirmation-message-modal">
+                            Update Status
+                        </button>
+                        {{--                            <button class="btn btn-primary">Update Status</button>--}}
+                    </div>
+
+                @else
+                    <div class="col-md-2 justify-content-center" style="display: flex;">
+                        <button class="btn btn-primary">Contact Support</button>
+                    </div>
+                @endif
+            </div>
+            {{--            </form>--}}
         </div>
         <div class="col-md-3" id="shipping-card">
             <p id="shipping-title">Shipping Details</p>
@@ -144,6 +205,10 @@ setlocale(LC_MONETARY, 'en_US');
         function updateStatusColor(color) {
             document.getElementById('order-status-tag').style.color = color;
             document.getElementById('order-status-tag').style.borderColor = color;
+        }
+
+        function submit(form) {
+            document.getElementById(form).submit();
         }
     </script>
 @endsection
