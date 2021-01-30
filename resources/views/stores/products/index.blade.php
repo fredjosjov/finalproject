@@ -22,6 +22,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Product Name</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Quantity</th>
                     <th scope="col">Price</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -34,8 +35,9 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->description }}</td>
+                            <td>{{ $item->quantity }}</td>
                             <td><input type="text" name="new-price" placeholder="{{ $item->price }}"></td>
-                            <td style="text-align: center;"><a href="#"><img class="small-icons"
+                            <td style="text-align: center;"><a href="{{ URL('/store/' .  $store->id . '/products/remove/' . $item->id) }}"><img class="small-icons"
                                                                              src="{{ asset('/icons/remove-icon.svg') }}"></a>
                             </td>
                         </tr>

@@ -28,4 +28,11 @@ class ProductController extends Controller
             'products' => $store->products
         ]);
     }
+
+    public function removeFromListing(string $store, string $id){
+        $product = Product::find($id);
+        $product->is_active = false;
+        $product->save();
+        return redirect('/store/' . $store . '/products');
+    }
 }
