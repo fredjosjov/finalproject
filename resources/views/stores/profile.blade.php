@@ -6,11 +6,11 @@ setlocale(LC_MONETARY, 'en_US');
 
 @section('content')
     <div class="row">
-        <h1 class="main-title">Profile</h1>
+        <h1 class="main-title">Store Information</h1>
     </div>
     <hr class="solid" style="border: 2px solid #232E3D; margin: 4px 0 4px 0;">
     <div class="row">
-        <h2 class="sub-title">Owner's Information</h2>
+        <h2 class="sub-title">About the Owner</h2>
     </div>
     <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 4px 0;">
     <div class="row">
@@ -33,7 +33,7 @@ setlocale(LC_MONETARY, 'en_US');
     </div>
     <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 4px 0;">
     <div class="row">
-        <h2 class="sub-title">Store Information</h2>
+        <h2 class="sub-title">About Store</h2>
     </div>
     <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 4px 0;">
     <div class="row">
