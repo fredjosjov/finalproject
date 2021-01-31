@@ -55,3 +55,4 @@ Route::get('/store/{store}/products', '\App\Http\Controllers\ProductController@i
 Route::get('/store/{store}/products/{mode}/{id}', '\App\Http\Controllers\ProductController@editListingItem');
 Route::put('/store/{store}/products/update-price', '\App\Http\Controllers\ProductController@updateListingPrices')->name('store-products.update-price');
 Route::get('/store/{store}/products/create', '\App\Http\Controllers\ProductController@create');
+Route::post('/store/{store}/products', '\App\Http\Controllers\ProductController@store')->name('store-products.store');

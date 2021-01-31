@@ -1,7 +1,8 @@
 @extends('stores.layout')
 
 @section('content')
-    <form>
+    <form method="POST" action="{{ route('store-products.store', ['store' => $store]) }}">
+        @csrf
         <div class="row">
             <h1>Add a new Product</h1>
         </div>
@@ -41,17 +42,23 @@
                         <input class="form-control" type="text" name="name" id="name">
                     </div>
                     <div class="col-md-6">
-
+                        @error('name')
+                        <small class="form-text text-danger error-message">*Required</small>
+                        @enderror
                     </div>
                 </div>
                 <div class="row input-fields">
                     <div class="col-md-2">
-                        <label for="description">Quantity</label>
+                        <label for="quantity">Quantity</label>
                     </div>
                     <div class="col-md-1">
-                        <input class="form-control" type="text" name="description" id="description">
+                        <input class="form-control" type="text" name="quantity" id="quantity">
                     </div>
-                    <div class="col-md-9"></div>
+                    <div class="col-md-9">
+                        @error('quantity')
+                        <small class="form-text text-danger error-message">*Required</small>
+                        @enderror
+                    </div>
                 </div>
                 <div class="row input-fields">
                     <div class="col-md-2">
@@ -60,7 +67,11 @@
                     <div class="col-md-1">
                         <input class="form-control" type="text" name="price" id="price">
                     </div>
-                    <div class="col-md-9"></div>
+                    <div class="col-md-9">
+                        @error('price')
+                        <small class="form-text text-danger error-message">*Required</small>
+                        @enderror
+                    </div>
                 </div>
                 <div class="row input-fields">
                     <div class="col-md-2">
@@ -69,7 +80,11 @@
                     <div class="col-md-6">
                         <textarea class="form-control" name="description" id="description"></textarea>
                     </div>
-                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        @error('description')
+                        <small class="form-text text-danger error-message">*Required</small>
+                        @enderror
+                    </div>
                 </div>
             </div>
         </div>
@@ -106,13 +121,15 @@
         </div>
         <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 8px 0;">
         <div class="row">
-            <div class="col-md-9"></div>
+            <div class="col-md-9 justify-content-end"></div>
             <div class="col-md-3 justify-content-end" style="display: flex;">
                 <button class="btn btn-primary">
                     Add Product
                 </button>
             </div>
         </div>
+        <input name="store_id" value="{{ $store->id }}" type="text" hidden>
+        <input name="is_active" value="1" type="text" hidden>
     </form>
 @endsection
 
