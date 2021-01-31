@@ -53,12 +53,16 @@ setlocale(LC_MONETARY, 'en_US');
         <h2 class="sub-title">Active Product Listing</h2>
     </div>
     <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 20px 0;">
-    <div class="row">
+    <div class="row" style="margin-bottom: 20px;">
         @if(count($store->products) > 0)
             <div class="card-group">
                 @foreach($store->products as $product)
                     <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
+                        @if(isset($product->image))
+                        <img src="{{ asset($product->image) }}" class="card-img-top" alt="..." style="max-width: 250px; max-height: 250px; align-self: center; padding-top: 10px;">
+                        @else
+                            <p style="height: 200px; line-height: 200px; text-align:center;">No product image available. :(</p>
+                        @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <p class="card-text">{{ $product->description }}</p>

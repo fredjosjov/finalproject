@@ -160,8 +160,12 @@ setlocale(LC_MONETARY, 'en_US');
 
     @foreach($order->products as $product)
         <div class="row">
-            <div class="col-md-3">
-                //TODO: Product Image
+            <div class="col-md-3 justify-content-center" style="display: flex;">
+                @if(isset($product->image))
+                    <img src="{{ asset($product->image) }}" style="max-width: 150px; max-height: 150px;">
+                @else
+                    <p style="height: 150px; line-height: 150px; text-align: center;">No Product Image Available.</p>
+                @endif
             </div>
             <div class="col-md-6 order-product-info">
                 <h2 class="products-info" id="product-name">{{ $product->name }}</h2>

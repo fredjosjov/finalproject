@@ -7,7 +7,7 @@
 @endif
 
 @section('content')
-    <form method="POST" action="<?php echo htmlspecialchars($GLOBALS['form-action'])?>" id="main-form">
+    <form method="POST" action="<?php echo htmlspecialchars($GLOBALS['form-action'])?>" id="main-form" enctype="multipart/form-data">
         @csrf
         @if($edit === true)
             @method('PUT')
@@ -24,17 +24,21 @@
             <div class="col-md-2 justify-content-center" id="product-image">
                 <div class="card h-100" style="width: 18rem;">
                     <div class="card-body">
+                        @if(isset($product->image))
+                            <img src="{{ asset($product->image) }}" style="max-height: 250px; max-width: 250px; margin-bottom: 10px;">
+                        @else
                         <div class="row flex-row justify-content-center">
-                            <h5 class="card-title" style="text-align: center;">Product Image</h5>
+                            <h5 class="card-title" style="text-align: center;">No product image available.</h5>
                         </div>
                         <div class="row flex-row justify-content-center">
-                            <p class="card-text" style="text-align: center; margin-bottom: 10%;">Upload product
+                            <p class="card-text" style="text-align: center; margin-bottom: 10%; color:red;">Upload product
                                 image.</p>
                         </div>
+                        @endif
                         <div class="row flex-row justify-content-center">
                             <div class="input-group mb-3">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="image-input">
+                                    <input type="file" class="custom-file-input" id="image-input" name="image">
                                     <label class="custom-file-label" for="image-input">Choose file</label>
                                 </div>
                             </div>

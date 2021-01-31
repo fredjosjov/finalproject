@@ -33,7 +33,11 @@
             <form action="/cart" method="post">
                 @csrf
                 <div class="card" style="width: 15rem;">
-                    <img src="{{$products->image}}" class="card-img-top" alt="">
+                    @if(isset($products->image))
+                    <img src="{{$products->image}}" class="card-img-top" alt="" style="max-width: 200px; max-height: 200px; align-self:center; padding: 10px;">
+                    @else
+                        <p style="height: 200px; line-height: 200px; vertical-align: center; text-align: center;">No product image available. :(</p>
+                    @endif
                     <div class="card-body">
                         <input type="text" name="productId" id="productId" value="{{$products->id}}" style="display: none">
                         <input type="text" name="storeId" id="storeId" value="{{$products->store_id}}" style="display: none">

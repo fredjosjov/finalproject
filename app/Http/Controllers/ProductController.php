@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Product;
 use App\Models\Store;
+use App\Traits\UploadTrait;
 
 class ProductController extends Controller
 {
+    use UploadTrait;
+
     public function index()
     {
         if (session()->has('credentials')) {
@@ -157,6 +161,15 @@ class ProductController extends Controller
     {
         if (session()->has('credentials')) {
             $product = Product::find(request()->product_id);
+            if(request()->has('image')){
+                $image = request()->file('image');
+                $name = Str::slug(request()->input('name')).'_'.time();
+                $folder = '/uploads/images/';
+                $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+                $this->uploadOne($image, $folder, 'public', $name);
+                $product->image = $filePath;
+            }
+            $product->save(); // Not the best practice, but the most simple and efficient to solve problem.
             $product->update($this->validateInputs());
             return redirect('/store/' . $store->id . '/products');
         } else {
@@ -189,7 +202,6 @@ class ProductController extends Controller
             'quantity' => 'required',
             'price' => 'required',
             'description' => 'nullable',
-            'image' => 'nullable',
             'is_active' => 'required'
         ]);
     }
