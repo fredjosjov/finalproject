@@ -80,12 +80,14 @@ class ProductController extends Controller
         return redirect('/store/' . request()->store_id . '/products');
     }
 
-    public function update()
+    public function destroy()
     {
-
+        $product = Product::find(request()->product_id);
+        $product->delete();
+        return redirect('store/' . request()->store_id . '/products');
     }
 
-    public function validateInput()
+    public function update()
     {
 
     }
