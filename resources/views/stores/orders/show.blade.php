@@ -137,11 +137,10 @@ setlocale(LC_MONETARY, 'en_US');
                 @if($order->status != 'Shipped' and $order->status != 'Shipped-Problematic')
                     <div class="col-md-2 justify-content-center" style="display: flex;">
                         <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#confirmation-message-modal">
+                                data-target="#confirmation-message-modal" {{ !isset($shipping) ? 'disabled' : '' }} {{ $order->status === 'Completed' ? 'hidden' : '' }}>
                             Update Status
                         </button>
                     </div>
-
                 @else
                     <div class="col-md-2 justify-content-center" style="display: flex;">
                         <button class="btn btn-primary">Contact Support</button>
@@ -151,10 +150,17 @@ setlocale(LC_MONETARY, 'en_US');
         </div>
         <div class="col-md-3" id="shipping-card">
             <p id="shipping-title">Shipping Details</p>
-            {{--            TODO: Shipping factory--}}
-            <p class="shipping-details">Address: <br><span
-                    id="address">Lorem Ipsum asdkasdklasbdlkbaslkdbaslbdasa</span></p>
-            <p class="shipping-details">Status: </p>
+            @if(isset($shipping))
+                <p class="shipping-details">Address: <br><span
+                        id="address">{{ $shipping->pivot->ship_address }}</span></p>
+                <p class="shipping-details">Status: {{ $shipping->pivot->status }}</p>
+            @else
+                <p class="shipping-details">Address: <br><span
+                        id="address">Not specified.</span> <span
+                        style="color: red;">Contact customer: {{$order->customer->phone}}</span></p>
+                <p class="shipping-details">Status: <span style="color: red;">Contact customer/support: support@fredjosjov.com</span>
+                </p>
+            @endif
         </div>
     </div>
 
@@ -164,12 +170,13 @@ setlocale(LC_MONETARY, 'en_US');
                 @if(isset($product->image))
                     <img src="{{ asset($product->image) }}" style="max-width: 150px; max-height: 150px;">
                 @else
-                    <p style="height: 150px; line-height: 150px; text-align: center;">No Product Image Available.</p>
+                    <p style="height: 150px; line-height: 150px; text-align: center;">No product image available.</p>
                 @endif
             </div>
             <div class="col-md-6 order-product-info">
                 <h2 class="products-info" id="product-name">{{ $product->name }}</h2>
-                <h5 class="products-info">Quantity : {{  $product->pivot->quantity }}</h5>
+                <small class="text-muted description">{{ $product->description }}</small>
+                <h5 class="products-info">Quantity : {{ $product->pivot->quantity }}</h5>
                 <div class="row">
                     <div class="col-md-6">
                         <h5 class="products-info">Buy Price (ea.)
@@ -186,7 +193,8 @@ setlocale(LC_MONETARY, 'en_US');
     @endforeach
     <div class="row justify-content-center" style="display: flex; margin-bottom: 10px;">
         @if($order->status != 'Shipped' and $order->status != 'Completed')
-            <button class="btn btn-primary" id="proceed-button" style="background-color: #bbbbbb; border: none;" disabled>Complete
+            <button class="btn btn-primary" id="proceed-button" style="background-color: #bbbbbb; border: none;"
+                    disabled>Complete
                 Order
             </button>
         @elseif($order->status === 'Completed')

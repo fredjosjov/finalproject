@@ -16,7 +16,7 @@ class ShippingController extends Controller
 	{
 		//$order = Order::all();
 		$shipping = ShippingDetails::join('products', 'shipping_details.product_id', '=', 'products.id')
-			->join('orders', 'orders.id', '=', 'shipping_details.orders_id')
+			->join('orders', 'orders.id', '=', 'shipping_details.order_id')
 			->join('order_details', 'orders.id', '=', 'order_details.order_id')
 			->join('customers', 'customers.id', '=', 'orders.customer_id')
 			->select('shipping_details.*', 'products.name', 'order_details.quantity', 'products.image')
@@ -30,7 +30,7 @@ class ShippingController extends Controller
 	{
 		$shipping = DB::table('shipping_details')->where('shipping_details.shipping_id', '=', $id)
 			->where('shipping_details.product_id', '=', $product_id)
-			->where('shipping_details.orders_id', '=', $orders_id)
+			->where('shipping_details.order_id', '=', $orders_id)
 			->update(['status' => 'Delivered']);
 
 		return redirect('/shipping');

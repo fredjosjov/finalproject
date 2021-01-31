@@ -30,4 +30,9 @@ class Order extends Model
     public function seller(){
         return $this->belongsTo(Seller::class);
     }
+
+    public function shippings(){
+        return $this->belongsToMany(Shipping::class, 'shipping_details')
+            ->withPivot('ship_address', 'status');
+    }
 }

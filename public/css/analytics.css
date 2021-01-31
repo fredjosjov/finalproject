@@ -194,7 +194,14 @@ h1 {
 
 .navbar {
     background: #232E3D;
+}
 
+.description {
+    padding-left: 10px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 

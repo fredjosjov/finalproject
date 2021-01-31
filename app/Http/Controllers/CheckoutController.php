@@ -78,7 +78,7 @@ class CheckoutController extends Controller
 			foreach ($cart as $index => $item) {
 				ShippingDetails::create([
 					'shipping_id' => $shipping->id,
-					'orders_id' => $order->id,
+					'order_id' => $order->id,
 					'product_id' => $item->product_id,
 					'status' => "Shipped",
 					'ship_address' => $request->ship_address,

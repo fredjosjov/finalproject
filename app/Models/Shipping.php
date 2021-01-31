@@ -15,6 +15,10 @@ class Shipping extends Model
 
     use HasFactory;
 
+    public function orders(){
+        return $this->belongsToMany(Order::class, 'shipping_details');
+    }
+
     public function usesTimestamps():bool
     {
         return false;

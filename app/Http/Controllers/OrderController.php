@@ -39,9 +39,11 @@ class OrderController extends Controller
     {
         if (session()->has('credentials')) {
             $order = Order::where('id', $id)->get()->first();
+            $shipping = $order->shippings->first();
             return view('stores.orders.show', [
                 'order' => $order,
                 'products' => $order->products,
+                'shipping' => $shipping,
                 'store' => $order->store
             ]);
         } else {
