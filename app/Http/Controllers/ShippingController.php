@@ -14,7 +14,16 @@ class ShippingController extends Controller
 {
 	public function index()
 	{
-		return view('shipping.index', ['shipping' => ShippingDetails::get()]);
+		//$order = Order::all();
+		$shipping = ShippingDetails::join('products', 'shipping_details.product_id', '=', 'products.id')
+			->join('orders', 'orders.id', '=', 'shipping_details.orders_id')
+			->join('order_details', 'orders.id', '=', 'order_details.order_id')
+			->join('customers', 'customers.id', '=', 'orders.customer_id')
+			->select('shipping_details.*', 'products.name', 'order_details.quantity', 'products.image')
+			->where('orders.customer_id', '=', session('custId'))
+			->get();
+
+		return view('shipping.index', ['shipping' => $shipping]);
 	}
 
 	public function changeStatus($id, $product_id, $orders_id)
