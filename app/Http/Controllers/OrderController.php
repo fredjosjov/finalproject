@@ -10,11 +10,13 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Store $store)
     {
-        // good-looking wishlist preview
-        // $product = Product::all();
-        // return view('order.products', ['product' => $product]);
+        $orders = $store->orders;
+        return view('stores.orders.index', [
+            'store' => $store,
+            'orders' => $orders
+        ]);
     }
 
     public function show(Store $store, string $id)

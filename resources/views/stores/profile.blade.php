@@ -1,3 +1,7 @@
+<?php
+setlocale(LC_MONETARY, 'en_US');
+?>
+
 @extends('stores.layout')
 
 @section('content')
@@ -50,19 +54,24 @@
     </div>
     <hr class="solid" style="border: 2px solid #bbbbbb; margin: 4px 0 20px 0;">
     <div class="row">
+        @if(count($store->products) > 0)
             <div class="card-group">
                 @foreach($store->products as $product)
-                <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $product->name }}</h5>
-                        <p class="card-text">{{ $product->description }}</p>
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <p class="card-text">{{ $product->description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">{{ $product->quantity }} products selling
+                                @ {{ money_format('%i', $product->price) }} each.</small>
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Quantity Left: {{ $product->quantity }}</small>
-                    </div>
-                </div>
                 @endforeach
             </div>
+        @else
+            <h5>No products listed yet.</h5>
+        @endif
     </div>
 @endsection
