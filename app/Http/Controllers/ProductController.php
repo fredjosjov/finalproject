@@ -87,6 +87,19 @@ class ProductController extends Controller
         return redirect('store/' . request()->store_id . '/products');
     }
 
+    public function search(Request $request)
+    {
+        $input = $request->search;
+        $product = Product::where('name', 'like', '%'.$input.'%')->get();
+        $store = \App\Models\Store::all();
+
+        if($input == ''){
+            return redirect('/product');
+        }else{
+            return view('product.index', ['product' => $product, 'store' => $store]);
+        }
+    }
+
     public function update()
     {
 

@@ -23,6 +23,7 @@ Route::post('/login', 'App\Http\Controllers\loginController@login');
 Route::get('/logout', 'App\Http\Controllers\loginController@logout');
 
 Route::get('/product', 'App\Http\Controllers\productController@index');
+Route::post('/product', 'App\Http\Controllers\productController@search');
 
 Route::get('/cart', 'App\Http\Controllers\cartController@index');
 Route::post('/cart', 'App\Http\Controllers\cartController@store');
