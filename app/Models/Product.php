@@ -9,12 +9,22 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'store_id',
+        'name',
+        'quantity',
+        'price',
+        'description',
+        'image',
+        'is_active'];
+
     public function store()
     {
         return $this->belongsTo(Store::class);
     }
 
-    public function orders(){
+    public function orders()
+    {
         return $this->belongsToMany(Order::class, 'order_details');
     }
 

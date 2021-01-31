@@ -66,7 +66,26 @@ class ProductController extends Controller
         ]);
     }
 
-    public function validatePriceInput(array $input): array
+    public function store()
+    {
+        Product::create(request()->validate([
+            'store_id' => 'required',
+            'name' => 'required',
+            'quantity' => 'required',
+            'price' => 'required',
+            'description' => 'nullable',
+            'image' => 'nullable',
+            'is_active' => 'required'
+        ]));
+        return redirect('/store/' . request()->store_id . '/products');
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function validateInput()
     {
 
     }
