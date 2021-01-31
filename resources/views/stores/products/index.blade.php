@@ -99,8 +99,10 @@
                                     src="{{ asset('/icons/add-icon.svg') }}"></a>
                         @endif
                         <a
-                            href="#"><img class="small-icons"
-                                          src="{{ asset('/icons/edit-icon.svg') }}"></a><a
+                            href="#"
+                            onclick="event.preventDefault(); document.getElementById('product-id-edit').value = {{ $product->id }}; document.getElementById('edit-form').submit()"><img
+                                class="small-icons"
+                                src="{{ asset('/icons/edit-icon.svg') }}"></a><a
                             href="#"
                             onclick="event.preventDefault(); document.getElementById('product-id').value = {{ $product->id }}; document.getElementById('delete-form').submit()"><img
                                 class="small-icons" src="{{ asset('/icons/clear-icon.svg') }}"></a></td>
@@ -113,6 +115,11 @@
             <input type="text" value="{{ $store->id }}" name="store_id" hidden>
             @csrf
             @method('DELETE')
+        </form>
+        <form id="edit-form" method="POST" action="{{ route('store-products.edit', ['store' => $store]) }}">
+            @csrf
+            <input type="text" name="product_id" id="product-id-edit" hidden>
+            <input type="text" value="{{ $store->id }}" name="store_id" hidden>
         </form>
     </div>
     <div class="row" style="margin-bottom: 20px;">

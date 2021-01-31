@@ -58,3 +58,5 @@ Route::put('/store/{store}/products/update-price', '\App\Http\Controllers\Produc
 Route::get('/store/{store}/products/create', '\App\Http\Controllers\ProductController@create');
 Route::post('/store/{store}/products', '\App\Http\Controllers\ProductController@store')->name('store-products.store');
 Route::delete('/store{store}/products', '\App\Http\Controllers\ProductController@destroy')->name('store-products.delete');
+Route::post('/store/{store}/products/create', 'App\Http\Controllers\ProductController@showSpecific')->name('store-products.edit');
+Route::put('/store/{store}/products/{product}/update', 'App\Http\Controllers\ProductController@update')->name('store-products.update');

@@ -62,21 +62,14 @@ class ProductController extends Controller
     public function create(string $store)
     {
         return view('stores.products.create', [
-            'store' => Store::find($store)
+            'store' => Store::find($store),
+            'edit' => false
         ]);
     }
 
     public function store()
     {
-        Product::create(request()->validate([
-            'store_id' => 'required',
-            'name' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
-            'description' => 'nullable',
-            'image' => 'nullable',
-            'is_active' => 'required'
-        ]));
+        Product::create($this->validateInputs());
         return redirect('/store/' . request()->store_id . '/products');
     }
 
@@ -90,18 +83,42 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $input = $request->search;
-        $product = Product::where('name', 'like', '%'.$input.'%')->get();
+        $product = Product::where('name', 'like', '%' . $input . '%')->get();
         $store = \App\Models\Store::all();
 
-        if($input == ''){
+        if ($input == '') {
             return redirect('/product');
-        }else{
+        } else {
             return view('product.index', ['product' => $product, 'store' => $store]);
         }
     }
 
-    public function update()
+    public function update(Store $store)
     {
+        $product = Product::find(request()->product_id);
+        $product->update($this->validateInputs());
+        return redirect('/store/' . $store->id . '/products');
+    }
 
+    public function showSpecific()
+    {
+        return view('stores.products.create', [
+            'store' => Store::find(request()->store_id),
+            'product' => Product::find(request()->product_id),
+            'edit' => true
+        ]);
+    }
+
+    public function validateInputs(): array
+    {
+        return request()->validate([
+            'store_id' => 'required',
+            'name' => 'required',
+            'quantity' => 'required',
+            'price' => 'required',
+            'description' => 'nullable',
+            'image' => 'nullable',
+            'is_active' => 'required'
+        ]);
     }
 }
