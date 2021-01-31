@@ -5,6 +5,15 @@
 @section('container')
 
 @section('heading', 'Product Page')
+
+<div class="container">
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+</div>
+
 <div class="container mt-2 mb-4">
     <div class="row">
         @foreach( $product as $products )
