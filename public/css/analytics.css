@@ -158,6 +158,16 @@ h1 {
     margin-bottom: 10px;
 }
 
+.order-jump-button {
+    padding: 10px 5px 10px 5px;
+    background: #1775FB;
+    color: white;
+    border-radius: 8px;
+}
+
+.order-table{
+    text-align: center;
+}
 
 
 

@@ -46,11 +46,11 @@ Route::post('/shipping/saveFeedback', 'App\Http\Controllers\ShippingController@s
 
 Route::get('/wishlist', 'App\Http\Controllers\WishlistController@index');
 Route::post('/wishlist/addWishlist/{id}', 'App\Http\Controllers\WishlistController@addWishlist');
-// Route::get('/orderproduct', 'App\Http\Controllers\OrderController@index');
 
 
 Route::get('/store/{store}/analytics', 'App\Http\Controllers\StoreController@stats');
 Route::get('/store/{store}/profile', 'App\Http\Controllers\StoreController@showProfile');
+Route::get('/store/{store}/customers', 'App\Http\Controllers\CustomerController@index');
 Route::get('/store/{store}/orders', 'App\Http\Controllers\OrderController@index');
 Route::get('/store/{store}/order/{id}', 'App\Http\Controllers\OrderController@show');
 Route::put('/store/{store}/order/{id}/update', 'App\Http\Controllers\OrderController@update')->name('order-status.update');
