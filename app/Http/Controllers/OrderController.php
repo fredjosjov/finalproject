@@ -19,7 +19,7 @@ class OrderController extends Controller
     public function index(Store $store)
     {
         if (session()->has('credentials')) {
-            $orders = $store->orders->sortByDesc('updated_at');
+            $orders = $store->orders->sortBy('updated_at');
             return view('stores.orders.index', [
                 'store' => $store,
                 'orders' => $orders
