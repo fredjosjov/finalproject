@@ -85,6 +85,7 @@ class CartController extends Controller
             $cart->store_id = $request->storeId;
             $cart->quantity = '1';
             $cart->price = $request->price;
+            $cart->isOrder = 0;
             $cart->save();
             return redirect("/product")->with('status', 'Product has been added to cart');
         }else{
@@ -95,6 +96,7 @@ class CartController extends Controller
                 $cart->store_id = $request->storeId;
                 $cart->quantity = '1';
                 $cart->price = $request->price;
+                $cart->isOrder = 0;
                 $cart->save();
                 return redirect("/product")->with('status', 'Product has been added to cart');
             }else{
