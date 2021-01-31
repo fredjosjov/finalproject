@@ -14,12 +14,7 @@ class ShippingController extends Controller
 {
 	public function index()
 	{
-		//$order = Order::all();
-		$shipping = ShippingDetails::join('products', 'shipping_details.product_id', '=', 'products.id')
-			->join('carts', 'products.id', '=', 'carts.product_id')
-			->select('shipping_details.*', 'products.name', 'carts.quantity', 'products.image')->get();
-
-		return view('shipping.index', ['shipping' => $shipping]);
+		return view('shipping.index', ['shipping' => ShippingDetails::get()]);
 	}
 
 	public function changeStatus($id, $product_id, $orders_id)
@@ -28,7 +23,7 @@ class ShippingController extends Controller
 			->where('shipping_details.product_id', '=', $product_id)
 			->where('shipping_details.orders_id', '=', $orders_id)
 			->update(['status' => 'Delivered']);
-			
+
 		return redirect('/shipping');
 	}
 
