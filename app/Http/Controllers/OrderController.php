@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Store;
 use App\Models\Order;
+// use App\Models\Product;
+
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     public function index()
     {
-
+        // good-looking wishlist preview
+        // $product = Product::all();
+        // return view('order.products', ['product' => $product]);
     }
 
     public function show(Store $store, string $id)
@@ -23,7 +27,8 @@ class OrderController extends Controller
         ]);
     }
 
-    public function update(Store $store, int $id, Request $request){
+    public function update(Store $store, int $id, Request $request)
+    {
         $order = Order::find($id);
         $order->status = $request->status;
         $order->save();

@@ -45,6 +45,8 @@ Route::post('/shipping/saveFeedback', 'App\Http\Controllers\ShippingController@s
 
 Route::get('/wishlist', 'App\Http\Controllers\WishlistController@index');
 Route::post('/wishlist/addWishlist/{id}', 'App\Http\Controllers\WishlistController@addWishlist');
+// Route::get('/orderproduct', 'App\Http\Controllers\OrderController@index');
+
 
 Route::get('/store/{store}/analytics', 'App\Http\Controllers\StoreController@stats');
 Route::get('/store/{store}/order/{id}', 'App\Http\Controllers\OrderController@show');
