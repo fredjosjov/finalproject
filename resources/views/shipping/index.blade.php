@@ -102,7 +102,7 @@
             @foreach($shipping as $p)
             <tr>
               <td>{{ $p->orders_id }}</td>
-              <td> <img src="{{ asset('image/' . $p->image) }}" alt="iMac" width="80"> </td>
+              <td> <img src="{{ $p->image }}" alt="iMac" width="80"> </td>
               <td>{{ $p->name }}</td>
               <td>{{ $p->quantity }}</td>
               <td>{{ $p->ship_address}}</td>

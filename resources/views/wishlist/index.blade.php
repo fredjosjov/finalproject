@@ -18,7 +18,7 @@
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <div class="white-box">
                             <div class="product-img">
-                                <img src="{{ asset('image/' . $p->image) }}" />
+                                <img src="{{ $p->image }}" />
                                 <div class="pro-img-overlay">
                                     <a href="javascript:void(0)" onclick="addCart('{{$p->id}}')" class="bg-success"><i class="ti-shopping-cart"></i></a>
                                     <a href="javascript:void(0)" onclick="addWishlist('{{$p->product_id}}')" class="bg-danger"><i class="ti-heart"></i></a>
