@@ -23,7 +23,7 @@ class CheckoutController extends Controller
 		$cart = DB::table('carts')
 			->join('products', 'products.id', '=', 'carts.product_id')
 			->where('carts.customer_id', '=', session('custId'))
-			->where('carts.isOrder', '=', 0)
+			//			->where('carts.isOrder', '=', 0)
 			->select('carts.*', 'products.image', 'products.name')
 			->get();
 
@@ -64,8 +64,8 @@ class CheckoutController extends Controller
 					'price' => $item->price
 				]);
 				$updatedCart = Cart::find($item->id);
-				$updatedCart->isOrder = 1;
-				$updatedCart->save();
+				//				$updatedCart->isOrder = 1;
+				$updatedCart->destroy();
 			};
 
 			//shipping

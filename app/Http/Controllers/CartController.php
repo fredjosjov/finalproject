@@ -15,7 +15,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        if(session()->has('credentials')){
+        if (session()->has('credentials')) {
             $user = session('custId');
             // $cart = Cart::where('customer_id', $user)
             //                 ->join('products', 'products.id', '=', 'carts.product_id')
@@ -24,7 +24,7 @@ class CartController extends Controller
 
             $cart = Cart::where('customer_id', $user)->get();
             return view('cart.index', compact('cart'));
-        }else{
+        } else {
             return redirect('/');
         }
     }
@@ -36,8 +36,10 @@ class CartController extends Controller
         // return $price;
 
         Cart::where('id', $request->id)
-            ->update(['quantity' => $qty,
-                    'price' => $price]);
+            ->update([
+                'quantity' => $qty,
+                'price' => $price
+            ]);
 
         return redirect('/cart');
     }
@@ -49,8 +51,10 @@ class CartController extends Controller
         // return $price;
 
         Cart::where('id', $request->id)
-            ->update(['quantity' => $qty,
-                    'price' => $price]);
+            ->update([
+                'quantity' => $qty,
+                'price' => $price
+            ]);
 
         return redirect('/cart');
     }
@@ -75,32 +79,32 @@ class CartController extends Controller
     {
         $cp = Cart::where('customer_id', session('custId'))->get();
         $pp = Cart::where('customer_id', session('custId'))
-                    ->where('product_id', $request->productId)
-                    ->get();
-        
-        if(count($cp) == 0){
+            ->where('product_id', $request->productId)
+            ->get();
+
+        if (count($cp) == 0) {
             $cart = new Cart;
             $cart->customer_id = session('custId');
             $cart->product_id = $request->productId;
             $cart->store_id = $request->storeId;
             $cart->quantity = '1';
             $cart->price = $request->price;
-            $cart->isOrder = 0;
+            //            $cart->isOrder = 0;
             $cart->save();
             return redirect("/product")->with('status', 'Product has been added to cart');
-        }else{
-            if(count($pp) == 0){
+        } else {
+            if (count($pp) == 0) {
                 $cart = new Cart;
                 $cart->customer_id = session('custId');
                 $cart->product_id = $request->productId;
                 $cart->store_id = $request->storeId;
                 $cart->quantity = '1';
                 $cart->price = $request->price;
-                $cart->isOrder = 0;
+                //                $cart->isOrder = 0;
                 $cart->save();
                 return redirect("/product")->with('status', 'Product has been added to cart');
-            }else{
-                foreach($pp as $p){
+            } else {
+                foreach ($pp as $p) {
                     $qty = $p->quantity + 1;
                     Cart::where('id', $p->id)
                         ->update(['quantity' => $qty]);
