@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
 use App\Models\Cart;
+use App\Models\Product;
 use App\Models\Payment;
 use App\Models\Order;
 use App\Models\OrderDetails;
@@ -26,8 +27,10 @@ class CheckoutController extends Controller
 			//			->where('carts.isOrder', '=', 0)
 			->select('carts.*', 'products.image', 'products.name')
 			->get();
-
-		return view('checkout.index', ['cart' => $cart]);
+		return view('checkout.index', [
+		    'cart' => $cart,
+            'productId' => $cart->first()->product_id //addition
+        ]);
 	}
 
 	public function tambah()
@@ -42,6 +45,7 @@ class CheckoutController extends Controller
 
 	public function payment(Request $request)
 	{
+	    $product = Product::find(request()->product_id);
 		$cart = DB::table('carts')
 			->join('products', 'products.id', '=', 'carts.product_id')
 			->where('carts.customer_id', '=', session('custId'))
@@ -51,7 +55,7 @@ class CheckoutController extends Controller
 			//order
 			$order = Order::create([
 				'customer_id' => session('custId'),
-				'store_id' => session('storeId'),
+				'store_id' => $product->store_id, //session('storeId')
 				'status' => "Paid",
 				'totalAmount' => $cart->sum('price')
 			]);

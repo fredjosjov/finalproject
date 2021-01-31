@@ -79,6 +79,8 @@
                                 </div>
                             </div>
                             <button class="btn btn-info">Make Payment</button>
+{{--                            Below is an addition to be able to pull product when making payment--}}
+                            <input type="text" value="{{ $productId }}" name="product_id" hidden>
                         </form>
                     </div>
                     <div class="clearfix"></div>

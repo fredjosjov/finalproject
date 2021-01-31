@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Login;
+use App\Models\User;
 use App\Models\Customer;
 use App\Models\Seller;
 use Apps\Models\Store;
@@ -32,9 +33,8 @@ class LoginController extends Controller
             'email' => 'required',
             'password' => 'required'
         ]);
-        
-        $users = Login::where('email', $emailInput)->get();
 
+        $users = User::where('email', $emailInput)->get(); // originally Login::
         if(count($users) == 0){
             return redirect('/')->with('status', 'Login credentials are Invalid!');
         }else{
