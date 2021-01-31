@@ -86,10 +86,13 @@ class CheckoutController extends Controller
 			};
 
 			//cards
-			Cards::create([
-				'card_number' => $request->card_number,
-				'type' => "Debit",
-			]);
+			$check = Cards::where('card_number', '=', $request->card_number)->first();
+			if ($check === null) {
+				Cards::create([
+					'card_number' => $request->card_number,
+					'type' => "Debit",
+				]);
+			}
 
 			//invoice
 			$invoice = Invoice::create([
