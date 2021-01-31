@@ -25,7 +25,7 @@
                         @endforeach
                         <p class="" id="price" name="price">Rp {{$products->price}}</p>
                         <button class="btn btn-primary">Add to Cart</button>
-                        <a href="javascript:void(0)" onclick="addWishlist('{{$products->id}}')" class="btn btn-danger"><i class="ti-heart"></i></a>
+                        <a href="javascript:void(0)" onclick="addWishlist('{{$products->id}}')" class="btn btn-danger">Wish<i class="ti-heart"></i></a>
                     </div>
                 </div>
             </form>
