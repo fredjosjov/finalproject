@@ -77,7 +77,6 @@ class ProductController extends Controller
             unset($inputArray['_token']);
             unset($inputArray['_method']);
 
-            //TODO: Required validations
             foreach ($inputArray as $id => $newPrice) {
                 $product = Product::find(intval($id));
                 $product->price = floatval($newPrice);
