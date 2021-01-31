@@ -14,12 +14,12 @@
         @endif
         <div class="row">
             @if($edit === true)
-                <h1> Edit Product</h1>
+                <h1 class="main-title"> Edit Product</h1>
             @else
-                <h1>Add a new Product</h1>
+                <h1 class="main-title">Add a New Product</h1>
             @endif
         </div>
-        <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 8px 0;">
+        <hr class="solid" style="border: 2px solid #232E3D; margin: 4px 0 8px 0;">
         <div class="row">
             <div class="col-md-2 justify-content-center" id="product-image">
                 <div class="card h-100" style="width: 18rem;">
@@ -44,8 +44,9 @@
             </div>
             <div class="col-md-10">
                 <div class="row">
-                    <h2> Product Information </h2>
+                    <h2 class="sub-title"> Product Information </h2>
                 </div>
+                <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 4px 0;">
                 <div class="row input-fields">
                     <div class="col-md-2">
                         <label for="name">Name</label>
@@ -120,7 +121,7 @@
             </div>
         </div>
         <div class="row">
-            <h2>Product Details</h2>
+            <h2 class="sub-title">Product Details</h2>
         </div>
         <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 8px 0;">
         <div class="row input-fields">

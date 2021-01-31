@@ -6,14 +6,14 @@
 
 @section('content')
     <div class="row">
-        <h1>Manage Inventory</h1>
+        <h1 class="main-title">Manage Inventory</h1>
     </div>
-    <hr class="solid" style="border: 2px solid #818181; margin: 4px 0 8px 0;">
+    <hr class="solid" style="border: 2px solid #232E3D; margin: 4px 0 8px 0;">
     <form method="POST" action="{{ route('store-products.update-price', ['store' => $store]) }}">
         @csrf
         @method('PUT')
         <div class="row justify-content-between" style="display: flex;">
-            <h2>Active Listings</h2>
+            <h2 class="sub-title">Active Listings</h2>
         </div>
         <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 8px 0;">
         <div class="row">
@@ -66,7 +66,7 @@
     </form>
     <hr class="solid" style="border: 1px solid #bbbbbb; margin: 8px 0 8px 0;">
     <div class="row">
-        <h2>My Products</h2>
+        <h2 class="sub-title">My Products</h2>
     </div>
     <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 8px 0;">
     <div class="row">

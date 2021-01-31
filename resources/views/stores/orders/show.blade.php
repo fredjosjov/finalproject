@@ -91,7 +91,7 @@ setlocale(LC_MONETARY, 'en_US');
                 <h1>Order #{{ $order->id }}</h1>
                 <p id="order-status-tag">{{ $order->status }}</p>
             </div>
-            <hr id="title-divider" class="solid" style="border: 2px solid #818181">
+            <hr id="title-divider" class="solid" style="border: 2px solid #232E3D">
             <div class="row" style="margin-bottom: 10px;">
                 <div class="col-md-4 justify-content-start" style="display: flex;">
                     <p class="summary-details">Customer

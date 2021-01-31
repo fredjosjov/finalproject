@@ -9,7 +9,7 @@
             <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Customer ID</th>
+                <th scope="col">Customer</th>
                 <th scope="col">Order Date</th>
                 <th scope="col">Last Status Update</th>
                 <th scope="col">Status</th>
@@ -20,7 +20,7 @@
             @foreach($orders as $order)
                 <tr>
                     <th scope="row">{{ $order->id }}</th>
-                    <td>{{ $order->customer_id }}</td>
+                    <td>{{ $order->customer->firstName }} {{ $order->customer->lastName }}</td>
                     <td>{{ $order->created_at }}</td>
                     <td>{{ $order->updated_at }}</td>
                     <td><p style="color:

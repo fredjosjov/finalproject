@@ -4,7 +4,6 @@
     <div class="row">
         <h1>Customers</h1>
     </div>
-    <hr class="solid" style="border: 2px solid #bbbbbb; margin: 4px 0 4px 0;">
     <div class="row">
         <table class="table">
             <thead class="thead-light">

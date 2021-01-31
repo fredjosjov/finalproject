@@ -8,8 +8,8 @@ setlocale(LC_MONETARY, 'en_US');
 @endsection
 
 @section('content')
-    <h1>Dashboard</h1>
-    <hr class="solid" style="border: 2px solid #818181">
+    <h1 class="main-title">Dashboard</h1>
+    <hr class="solid" style="border: 2px solid #232E3D; margin: 4px 0 16px 0;">
     <div class="row justify-content-center">
         <div class="col-md-3 justify-content-center" style="display: flex;">
             <div class="card text-center" style="width: 20rem;">

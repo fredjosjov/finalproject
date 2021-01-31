@@ -1,3 +1,14 @@
+@font-face {
+    font-family: "Amazon Ember";
+    src: url("//db.onlinewebfonts.com/t/157c6cc36dd65b1b2adc9e7f3329c761.eot");
+    src: url("//db.onlinewebfonts.com/t/157c6cc36dd65b1b2adc9e7f3329c761.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/157c6cc36dd65b1b2adc9e7f3329c761.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/157c6cc36dd65b1b2adc9e7f3329c761.woff") format("woff"), url("//db.onlinewebfonts.com/t/157c6cc36dd65b1b2adc9e7f3329c761.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/157c6cc36dd65b1b2adc9e7f3329c761.svg#Amazon Ember") format("svg");
+}
+
+* {
+    font-size: 100%;
+    font-family: "Amazon Ember";
+}
+
 h1 {
     color: darkblue;
 }
@@ -22,10 +33,17 @@ h1 {
 }
 
 .main-card-title {
-    background: #bbb;
+    background: #232E3D;
+    color: white;
     padding-top: 20px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #bbbbbb;
+    border-bottom: 2px solid #232E3D;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+.main-title {
+    margin-bottom: 0;
 }
 
 #store-back-btn {
@@ -165,8 +183,18 @@ h1 {
     border-radius: 8px;
 }
 
-.order-table{
+.order-table {
     text-align: center;
+}
+
+.sub-title{
+    margin-left: 20px;
+    margin-bottom: 0;
+}
+
+.navbar {
+    background: #232E3D;
+
 }
 
 

@@ -6,13 +6,13 @@ setlocale(LC_MONETARY, 'en_US');
 
 @section('content')
     <div class="row">
-        <h1>Profile</h1>
+        <h1 class="main-title">Profile</h1>
     </div>
-    <hr class="solid" style="border: 2px solid #bbbbbb; margin: 4px 0 4px 0;">
+    <hr class="solid" style="border: 2px solid #232E3D; margin: 4px 0 4px 0;">
     <div class="row">
-        <h2>Owner's Information</h2>
+        <h2 class="sub-title">Owner's Information</h2>
     </div>
-    <hr class="solid" style="border: 2px solid #bbbbbb; margin: 4px 0 4px 0;">
+    <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 4px 0;">
     <div class="row">
         <div class="col-md-2">
             <h5>Name</h5>
@@ -31,11 +31,11 @@ setlocale(LC_MONETARY, 'en_US');
         </div>
         <div class="col-md-10">{{ $store->seller->address }}</div>
     </div>
-    <hr class="solid" style="border: 2px solid #bbbbbb; margin: 4px 0 4px 0;">
+    <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 4px 0;">
     <div class="row">
-        <h2>Store Information</h2>
+        <h2 class="sub-title">Store Information</h2>
     </div>
-    <hr class="solid" style="border: 2px solid #bbbbbb; margin: 4px 0 4px 0;">
+    <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 4px 0;">
     <div class="row">
         <div class="col-md-2">
             <h5>Store Name</h5>
@@ -48,11 +48,11 @@ setlocale(LC_MONETARY, 'en_US');
         </div>
         <div class="col-md-10">{{ $store->created_at }}</div>
     </div>
-    <hr class="solid" style="border: 2px solid #bbbbbb; margin: 4px 0 4px 0;">
+    <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 4px 0;">
     <div class="row">
-        <h2>Active Product Listing</h2>
+        <h2 class="sub-title">Active Product Listing</h2>
     </div>
-    <hr class="solid" style="border: 2px solid #bbbbbb; margin: 4px 0 20px 0;">
+    <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 20px 0;">
     <div class="row">
         @if(count($store->products) > 0)
             <div class="card-group">
