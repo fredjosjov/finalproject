@@ -6,7 +6,12 @@
                         <h4 class="page-title">Customer Profile</h4>
                     </div>
                     <div class="col">
+{{--                        @if directives to adjust the following element based on session('storeId')--}}
+                        @if(session('storeId') != null)
                         Switch to seller account: <a href="/store/<?= session('storeId') ?>/analytics" class="badge badge-primary">Switch</a>
+                        @else
+                            Interested in making profit with us? <a href="#" class="badge badge-primary">Create Seller Account</a>
+                        @endif
                     </div>
                     <div class="col">
                         <ol class="breadcrumb">
@@ -30,7 +35,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="control-label">First Name</label>
-                                                        <input type="text" name="firstName" class="form-control" value=" {{ $customer->firstName }}"> 
+                                                        <input type="text" name="firstName" class="form-control" value=" {{ $customer->firstName }}">
                                                         @if($errors->has('firstName'))
                                                             <div class="text-danger">
                                                                 {{ $errors->first('firstName')}}
@@ -42,7 +47,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Last Name</label>
-                                                        <input type="text" name="lastName" class="form-control" value=" {{ $customer->lastName }}"> 
+                                                        <input type="text" name="lastName" class="form-control" value=" {{ $customer->lastName }}">
                                                         @if($errors->has('lastName'))
                                                             <div class="text-danger">
                                                                 {{ $errors->first('lastName')}}
@@ -56,7 +61,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Phone</label>
-                                                        <input type="text" name="phone" class="form-control" value=" {{ $customer->phone }}"> 
+                                                        <input type="text" name="phone" class="form-control" value=" {{ $customer->phone }}">
                                                         @if($errors->has('phone'))
                                                             <div class="text-danger">
                                                                 {{ $errors->first('phone')}}
