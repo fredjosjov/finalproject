@@ -12,7 +12,7 @@
             @foreach($orders as $order)
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Store: {{$order->seller->store->store_name}}</h5>
+                        <h5 class="card-title">Store: {{$order->store->store_name}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Total Amount: Rp {{$order->totalAmount}}</h6>
                         <form action="/detail" method="post">
                         @csrf

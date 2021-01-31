@@ -51,7 +51,7 @@ class CheckoutController extends Controller
 			//order
 			$order = Order::create([
 				'customer_id' => session('custId'),
-				'seller_id' => 19,
+				'store_id' => 14,
 				'status' => "Paid",
 				'totalAmount' => $cart->sum('price')
 			]);
