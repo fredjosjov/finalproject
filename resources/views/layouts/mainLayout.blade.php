@@ -32,6 +32,17 @@
         </div>
     </nav>
 
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-sm-10">
+                <h2>@yield('heading')</h2>
+            </div>
+            <div class="col">
+                Username: <a href="/edit-profile/<?= session('custId') ?>"><?= session('custName') ?></a>
+            </div>
+        </div>
+    </div>
+
     @yield('container')
 
     <!-- Optional JavaScript; choose one of the two! -->
