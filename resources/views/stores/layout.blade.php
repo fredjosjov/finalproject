@@ -22,13 +22,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="{{ URL('store/'. $store->id . '/analytics') }}">Dashboard</a>
+                <a class="nav-link" href="{{ URL('store/' . $store->id . '/analytics') }}">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ URL('store/'. $store->id . '/profile') }}">Profile</a>
+                <a class="nav-link" href="{{ URL('store/' . $store->id . '/profile') }}">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Customers</a>
+                <a class="nav-link" href="{{ URL('store/' . $store->id . '/customers') }}">Customers</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ URL('store/' . $store->id . '/products') }}">Products</a>
