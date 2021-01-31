@@ -28,7 +28,9 @@ class StoreController extends Controller
             return view('stores.analytics.dashboard', [
                 'store' => $store,
                 'products' => $store->products(),
+                'activeProducts' => $store->products()->where('is_active', true),
                 'orders' => $orders,
+                'completedOrders' => $orders->where('status', 'Completed'),
                 'revenue' => $revenue,
                 'activities' => $recentOrders
             ]);

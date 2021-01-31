@@ -15,7 +15,7 @@ setlocale(LC_MONETARY, 'en_US');
             <div class="card text-center" style="width: 20rem;">
                 <div class="card-body main-cards">
                     <h2 class="card-title main-card-title">Products Listed</h2>
-                    <h3 class="card-text">{{ $products->count() }}</h3>
+                    <h3 class="card-text"> <span style="color: blue;">{{ $activeProducts->count() }}</span> / {{ $products->count() }}</h3>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@ setlocale(LC_MONETARY, 'en_US');
             <div class="card text-center" style="width: 20rem;">
                 <div class="card-body main-cards">
                     <h2 class="card-title main-card-title">Completed Orders</h2>
-                    <h3 class="card-text">{{ $orders->count() }}</h3>
+                    <h3 class="card-text"> <span style="color: red;"> {{ $completedOrders->count() }} </span> / {{ $orders->count() }} <span style="font-size: 16px;">({{ $completedOrders->count() / $orders->count() * 100 }}%)</span></h3>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@ setlocale(LC_MONETARY, 'en_US');
                     @foreach($activities as $activity)
                         <tr>
                             <th scope="row"><a
-                                    href="customers/{{ $activity->customer_id }}">{{ $activity->customer->firstName }} {{ $activity->customer->lastName }}</a>
+                                    href="{{ url('/store/' . $store->id . '/customers') }}">{{ $activity->customer->firstName }} {{ $activity->customer->lastName }}</a>
                                 placed an <a href="/store/{{ $store->id }}/order/{{ $activity->id }}">order</a> worth
                                 of {{ money_format('%i' , $activity->totalAmount) }}.
                             </th>
