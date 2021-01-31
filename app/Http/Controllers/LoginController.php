@@ -65,6 +65,7 @@ class LoginController extends Controller
             session()->pull('credentials');
             session()->pull('custId');
             session()->pull('custName');
+            session()->pull('storeId');
             return redirect('/');
         }else{
             return redirect('/product');
