@@ -45,8 +45,13 @@ Route::post('/shipping/saveFeedback', 'App\Http\Controllers\ShippingController@s
 
 Route::get('/wishlist', 'App\Http\Controllers\WishlistController@index');
 Route::post('/wishlist/addWishlist/{id}', 'App\Http\Controllers\WishlistController@addWishlist');
+// Route::get('/orderproduct', 'App\Http\Controllers\OrderController@index');
+
 
 Route::get('/store/{store}/analytics', 'App\Http\Controllers\StoreController@stats');
 Route::get('/store/{store}/order/{id}', 'App\Http\Controllers\OrderController@show');
 Route::put('/store/{store}/order/{id}/update', 'App\Http\Controllers\OrderController@update')->name('order-status.update');
 Route::get('/store/{store}/products', '\App\Http\Controllers\ProductController@indexStore');
+Route::get('/store/{store}/products/{mode}/{id}', '\App\Http\Controllers\ProductController@editListingItem');
+Route::put('/store/{store}/products/update-price', '\App\Http\Controllers\ProductController@updateListingPrices')->name('store-products.update-price');
+Route::get('/store/{store}/products/create', '\App\Http\Controllers\ProductController@create');

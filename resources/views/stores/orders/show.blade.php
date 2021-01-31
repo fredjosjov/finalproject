@@ -113,8 +113,7 @@ setlocale(LC_MONETARY, 'en_US');
                     @switch($order->status)
                         @case('Newly Created')
                         <div class="form-group row" id="status-field">
-                            <label id="status-label" for="status-input" class="col-md-12">Processed Your
-                                Order?</label>
+                            <label id="status-label" for="status-input" class="col-md-12">Confirm order?</label>
                             <input type="text" id="status-input" name="status" value="Processed" hidden>
                         </div>
                         @break
@@ -183,7 +182,7 @@ setlocale(LC_MONETARY, 'en_US');
     @endforeach
     <div class="row justify-content-center" style="display: flex; margin-bottom: 10px;">
         @if($order->status != 'Shipped' and $order->status != 'Completed')
-            <button class="btn btn-primary" id="proceed-button" style="background-color: #bbbbbb" disabled>Complete
+            <button class="btn btn-primary" id="proceed-button" style="background-color: #bbbbbb; border: none;" disabled>Complete
                 Order
             </button>
         @elseif($order->status === 'Completed')

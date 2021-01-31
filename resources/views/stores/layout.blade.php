@@ -13,19 +13,34 @@
 </head>
 <body>
 @yield('modal')
-<div class="row">
-    <div class="analytics col-md-2" id="analytics-navigation">
-        @yield('title')
-        <nav class="nav flex-column">
-            <a class="nav-link active justify-content-center" href="{{ URL('store/'. $store->id . '/analytics') }}">Dashboard</a>
-            <a class="nav-link active" href="#">Store</a>
-            <a class="nav-link active" href="#">Customers</a>
-            <a class="nav-link active" href="{{ URL('store/' . $store->id . '/products') }}">Products</a>
-            <a class="nav-link active" href="#">Orders</a>
-        </nav>
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">{{ ucfirst($store->name) }}'s Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ URL('store/'. $store->id . '/analytics') }}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Store Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Customers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ URL('store/' . $store->id . '/products') }}">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Orders</a>
+            </li>
+        </ul>
     </div>
-    <div class="analytics col-md-9" id="analytics-content">
+</nav>
+<div class="container-fluid">
+    <div class="analytics col-md-12" id="analytics-content">
         @yield('content')
     </div>
 </div>
