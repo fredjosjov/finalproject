@@ -36,13 +36,22 @@ class CustomerController extends Controller
         return redirect('/checkout')->with($notification);
     }
 
+    /**
+     * @author Alfriyadi Rafles <alfriyadi.rafles@binus.ac.id>
+     * @param string $store
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function index(string $store)
     {
-        $store_ = \App\Models\Store::find($store);
-        $orders = \App\Models\Order::orderBy('created_at', 'DESC')->where('store_id', $store)->get();
-        return view('stores.customers.index', [
-            'store' => $store_,
-            'orders' => $orders
-        ]);
+        if(session()->has('credentials')){
+            $store_ = \App\Models\Store::find($store);
+            $orders = \App\Models\Order::orderBy('created_at', 'DESC')->where('store_id', $store)->get();
+            return view('stores.customers.index', [
+                'store' => $store_,
+                'orders' => $orders
+            ]);
+        } else {
+            return redirect('/');
+        }
     }
 }

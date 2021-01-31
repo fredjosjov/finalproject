@@ -19,25 +19,31 @@
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ URL('store/' . $store->id . '/analytics') }}">Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ URL('store/' . $store->id . '/profile') }}">Profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ URL('store/' . $store->id . '/customers') }}">Customers</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ URL('store/' . $store->id . '/products') }}">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ URL('store/' . $store->id . '/orders') }}">Orders</a>
-            </li>
-        </ul>
+    <div class="col-md-9">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ URL('store/' . $store->id . '/analytics') }}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ URL('store/' . $store->id . '/profile') }}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ URL('store/' . $store->id . '/customers') }}">Customers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ URL('store/' . $store->id . '/products') }}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ URL('store/' . $store->id . '/orders') }}">Orders</a>
+                </li>
+            </ul>
+        </div>
     </div>
+    <div class="col-md-2 justify-content-end" style="display: flex; padding-right: 0;">
+        <a href="{{ url('logout') }}" style="background: red; color: white; padding: 10px 10px 10px 10px; border-radius: 8px;">Logout</a>
+    </div>
+
 </nav>
 <div class="container-fluid">
     <div class="analytics col-md-12" id="analytics-content">

@@ -9,27 +9,46 @@ use phpDocumentor\Reflection\Types\Integer;
 
 class StoreController extends Controller
 {
+    /**
+     * @author Alfriyadi Rafles <alfriyadi.rafles@binus.ac.id>
+     * @param Store $store
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function stats(Store $store)
     {
-        $orders = $store->orders()->get();
-        $revenue = 0;
+        if (session()->has('credentials')) {
+            $orders = $store->orders()->get();
+            $revenue = 0;
 
-        foreach ($orders as $order) {
-            $revenue += $order->totalAmount;
+            foreach ($orders as $order) {
+                $revenue += $order->totalAmount;
+            }
+
+            $recentOrders = Order::orderBy('created_at', 'DESC')->where('store_id', $store->id)->get();
+            return view('stores.analytics.dashboard', [
+                'store' => $store,
+                'products' => $store->products(),
+                'orders' => $orders,
+                'revenue' => $revenue,
+                'activities' => $recentOrders
+            ]);
+        } else {
+            return redirect('/');
         }
-
-        $recentOrders = Order::orderBy('created_at', 'DESC')->where('store_id', $store->id)->get();
-        return view('stores.analytics.dashboard', [
-            'store' => $store,
-            'products' => $store->products(),
-            'orders' => $orders,
-            'revenue' => $revenue,
-            'activities' => $recentOrders
-        ]);
     }
 
+    /**
+     * @author Alfriyadi Rafles <alfriyadi.rafles@binus.ac.id>
+     * @param Store $store
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function showProfile(Store $store)
     {
-        return view('stores.profile', ['store' => $store]);
+        if(session()->has('credentials')){
+            return view('stores.profile', ['store' => $store]);
+        }
+        else {
+            return redirect('/');
+        }
     }
 }
