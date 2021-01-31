@@ -10,4 +10,5 @@ class Cards extends Model
     protected $fillable = ['card_number', 'type'];
 
     protected $primaryKey = 'card_number';
+    public $timestamps = false;
 }

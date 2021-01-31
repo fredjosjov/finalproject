@@ -11,4 +11,5 @@ class Review extends Model
 
     protected $dates = ['date'];
     protected $primaryKey = 'id';
+    public $timestamps = false;
 }

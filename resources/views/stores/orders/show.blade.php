@@ -22,7 +22,7 @@ setlocale(LC_MONETARY, 'en_US');
                 </div>
                 <div class="modal-body">
                     @switch($order->status)
-                        @case('Newly Created')
+                        @case('Paid')
                         <p id="confirmation-message">Order status will be updated to <span
                                 class="confirmation-warning">Processed. </span><br> Make sure that
                             the you are ready to ship the items and the details of the products are correct. <br>
@@ -60,7 +60,7 @@ setlocale(LC_MONETARY, 'en_US');
                         @csrf
                         @method('PUT')
                         @switch($order->status)
-                            @case('Newly Created')
+                            @case('Paid')
                             <input name="status" type="text" value="Processed" hidden>
                             @break
                             @case('Processed')
@@ -111,7 +111,7 @@ setlocale(LC_MONETARY, 'en_US');
                 </div>
                 <div class="col-md-4">
                     @switch($order->status)
-                        @case('Newly Created')
+                        @case('Paid')
                         <div class="form-group row" id="status-field">
                             <label id="status-label" for="status-input" class="col-md-12">Confirm order?</label>
                             <input type="text" id="status-input" name="status" value="Processed" hidden>
@@ -200,7 +200,7 @@ setlocale(LC_MONETARY, 'en_US');
 @section('js-script')
     <script type="text/javascript">
         @switch($order->status)
-        @case('Newly Created')
+        @case('Paid')
         updateStatusColor('#0088ff');
         @break
         @case('Processed')
