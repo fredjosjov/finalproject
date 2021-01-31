@@ -14,6 +14,18 @@
     @endif
 </div>
 
+<div class="container mt-4 mb-4">
+    <form action="/product" method="post">
+    @csrf
+        <div class="input-group mb-3" style="width: 30rem;">
+            <input type="text" class="form-control" placeholder="Search Product" id="search" name="search">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
 <div class="container mt-2 mb-4">
     <div class="row">
         @foreach( $product as $products )
