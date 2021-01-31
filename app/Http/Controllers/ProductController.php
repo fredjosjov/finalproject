@@ -51,12 +51,19 @@ class ProductController extends Controller
         unset($inputArray['_method']);
 
         //TODO: Required validations
-        foreach($inputArray as $id => $newPrice){
+        foreach ($inputArray as $id => $newPrice) {
             $product = Product::find(intval($id));
             $product->price = floatval($newPrice);
             $product->save();
         }
         return redirect('/store/' . $store . '/products');
+    }
+
+    public function create(string $store)
+    {
+        return view('stores.products.create', [
+            'store' => Store::find($store)
+        ]);
     }
 
     public function validatePriceInput(array $input): array

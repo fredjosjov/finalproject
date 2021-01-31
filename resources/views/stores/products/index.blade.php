@@ -64,7 +64,7 @@
             </div>
         </div>
     </form>
-    <hr class="solid" style="border: 1px solid #bbbbbb; margin: 4px 0 8px 0;">
+    <hr class="solid" style="border: 1px solid #bbbbbb; margin: 8px 0 8px 0;">
     <div class="row">
         <h2>My Products</h2>
     </div>
@@ -107,9 +107,9 @@
             </tbody>
         </table>
     </div>
-    <div class="row" style="margin-bottom: 10px;">
+    <div class="row" style="margin-bottom: 20px;">
         <div class="col-md-4">
-            <a href="/store/{{ $store->id }}/create-product" id="create-product">Create a New Product</a>
+            <a href="/store/{{ $store->id }}/products/create" id="create-product">Add a New Product</a>
         </div>
         <div class="col-md-4 justify-content-center" style="display: flex;">
             {{--            //TODO: (Optional) Pagination--}}

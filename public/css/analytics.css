@@ -141,16 +141,21 @@ h1 {
     color: red;
 }
 
-.small-icons{
+.small-icons {
     max-width: 20px;
     max-height: 20px;
 }
 
-#create-product{
+#create-product {
     background: #1775FB;
     color: white;
     padding: 10px 10px 10px 10px;
     border-radius: 8px;
+}
+
+.input-fields {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 
