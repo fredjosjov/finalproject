@@ -31,7 +31,7 @@
                     <tbody>
                         @foreach($cart as $p)
                         <tr>
-                            <td><img src="{{ asset('image/' . $p->image) }}" style="max-width: 120px;" /></td>
+                            <td><img src="{{ $p->image }}" style="max-width: 120px;" /></td>
                             <td>{{ $p->name }}</td>
                             <td>{{ $p->quantity }}</td>
                             <td>{{ $p->price }}</td>
