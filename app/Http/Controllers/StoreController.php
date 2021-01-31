@@ -27,4 +27,9 @@ class StoreController extends Controller
             'activities' => $recentOrders
         ]);
     }
+
+    public function showProfile(Store $store)
+    {
+        return view('stores.profile', ['store' => $store]);
+    }
 }

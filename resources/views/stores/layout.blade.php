@@ -25,7 +25,7 @@
                 <a class="nav-link" href="{{ URL('store/'. $store->id . '/analytics') }}">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Store Profile</a>
+                <a class="nav-link" href="{{ URL('store/'. $store->id . '/profile') }}">Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Customers</a>
