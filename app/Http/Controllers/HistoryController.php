@@ -16,7 +16,7 @@ class HistoryController extends Controller
     public function index()
     {
         if(session()->has('credentials')){
-            $orders = Order::where('customer_id', session('custId'))->get();
+            $orders = Order::where('customer_id', session('custId'))->orderBy('created_at', 'DESC')->get();
             return view('history.index', compact('orders'));
         }else{
             return redirect('/');
@@ -55,7 +55,7 @@ class HistoryController extends Controller
         $id = $request->orderId;
         $order = Order::where('id', $id)->get()->first();
         $products = $order->products;
-        
+
         return view('history.detail', [
             'order' => $order,
             'products' => $products

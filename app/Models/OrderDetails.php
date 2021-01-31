@@ -10,4 +10,5 @@ class OrderDetails extends Model
     protected $fillable = ['order_id','product_id','quantity','price'];
 
     protected $primaryKey = 'order_id';
+    public $timestamps = false;
 }
