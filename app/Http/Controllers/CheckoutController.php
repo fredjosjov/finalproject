@@ -65,7 +65,7 @@ class CheckoutController extends Controller
 				]);
 				$updatedCart = Cart::find($item->id);
 				//				$updatedCart->isOrder = 1;
-				$updatedCart->destroy();
+				$updatedCart->delete();
 			};
 
 			//shipping
