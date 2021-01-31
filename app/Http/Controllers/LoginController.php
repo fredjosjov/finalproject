@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Login;
 use App\Models\Customer;
+use App\Models\Seller;
+use Apps\Models\Store;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -43,6 +45,11 @@ class LoginController extends Controller
                     foreach($customer as $cust){
                         session()->put('custId', $cust->id);
                         session()->put('custName', $cust->firstName . ' ' . $cust->lastName);
+                    }
+                    $sellers = Seller::where('user_id', $user->id)->get();
+                    foreach($sellers as $seller){
+                        $storeId = $seller->store->id;
+                        session()->put('storeId', $storeId);
                     }
                     return redirect('/product');
                 }else{

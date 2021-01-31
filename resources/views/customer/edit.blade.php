@@ -2,9 +2,13 @@
 
 @section('content')
                 <div class="row bg-title">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Customer Profile</h4> </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                    <div class="col">
+                        <h4 class="page-title">Customer Profile</h4>
+                    </div>
+                    <div class="col">
+                        Switch to seller account: <a href="/store/<?= session('storeId') ?>/analytics" class="badge badge-primary">Switch</a>
+                    </div>
+                    <div class="col">
                         <ol class="breadcrumb">
                             <li><a href="#">Dashboard</a></li>
                             <li class="active">Customer Profile</li>
