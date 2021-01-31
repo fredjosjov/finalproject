@@ -25,7 +25,7 @@
                         </form>
                     </div>
 
-                    <div class="col">
+                    <div class="col-sm-3">
                         <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
                             <div class="btn-group" role="group" aria-label="First group">
                                 Quantity:
@@ -33,6 +33,7 @@
                                 @csrf
                                     <input type="text" name="id" id="id" value="{{$carts->id}}" style="display: none">
                                     <input type="text" name="quantity" id="quantity" value="{{$carts->quantity}}" style="display: none">
+                                    <input type="text" name="price" id="price" value="{{$carts->product->price}}" style="display: none">
                                     <button type="submit" class="btn btn-outline-secondary">-</button>
                                 </form>
                                 <button type="button" class="btn btn-outline-secondary" disabled>{{$carts->quantity}}</button>
@@ -40,10 +41,15 @@
                                 @csrf
                                     <input type="text" name="id" id="id" value="{{$carts->id}}" style="display: none">
                                     <input type="text" name="quantity" id="quantity" value="{{$carts->quantity}}" style="display: none">
+                                    <input type="text" name="price" id="price" value="{{$carts->product->price}}" style="display: none">
                                     <button type="submit" class="btn btn-outline-secondary">+</button>
                                 </form>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="col">
+                        <label for="">Price: {{$carts->price}}</label>
                     </div>
 
                 </div>

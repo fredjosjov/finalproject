@@ -12,7 +12,7 @@
             <form action="/cart" method="post">
                 @csrf
                 <div class="card" style="width: 15rem;">
-                    <img src="https://images-na.ssl-images-amazon.com/images/I/51k6JSEUR3L._AC_SL1100_.jpg" class="card-img-top" alt="">
+                    <img src="{{$products->image}}" class="card-img-top" alt="">
                     <div class="card-body">
                         <input type="text" name="productId" id="productId" value="{{$products->id}}" style="display: none">
                         <input type="text" name="storeId" id="storeId" value="{{$products->store_id}}" style="display: none">

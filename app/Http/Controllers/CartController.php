@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use Apps\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -31,9 +32,12 @@ class CartController extends Controller
     public function addQty(Request $request)
     {
         $qty = $request->quantity + 1;
+        $price = $qty * $request->price;
+        // return $price;
 
         Cart::where('id', $request->id)
-            ->update(['quantity' => $qty]);
+            ->update(['quantity' => $qty,
+                    'price' => $price]);
 
         return redirect('/cart');
     }
@@ -41,9 +45,12 @@ class CartController extends Controller
     public function minusQty(Request $request)
     {
         $qty = $request->quantity - 1;
+        $price = $qty * $request->price;
+        // return $price;
 
         Cart::where('id', $request->id)
-            ->update(['quantity' => $qty]);
+            ->update(['quantity' => $qty,
+                    'price' => $price]);
 
         return redirect('/cart');
     }
