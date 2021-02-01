@@ -67,6 +67,7 @@ class OrderController extends Controller
             return view('stores.orders.show', [
                 'store' => $store,
                 'order' => $order,
+                'shipping' => $order->shippings->first(),
                 'message' => 'Successfully updated Order Status.'
             ]);
         } else{

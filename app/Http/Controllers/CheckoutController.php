@@ -27,10 +27,18 @@ class CheckoutController extends Controller
 			//			->where('carts.isOrder', '=', 0)
 			->select('carts.*', 'products.image', 'products.name')
 			->get();
-		return view('checkout.index', [
-		    'cart' => $cart,
-            'productId' => $cart->first()->product_id //addition
-        ]);
+        $returnVariableArray = array();
+        if(!$cart->isEmpty()){
+            $returnVariableArray = [
+                'cart' => $cart,
+                'productId' => $cart->first()->product_id
+            ];
+        } else {
+            $returnVariableArray = [
+                'cart' => $cart
+            ];
+        }
+		return view('checkout.index', $returnVariableArray);
 	}
 
 	public function tambah()
@@ -54,11 +62,11 @@ class CheckoutController extends Controller
 		try {
 			//order
 			$order = Order::create([
-				'customer_id' => session('custId'),
-				'store_id' => $product->store_id, //session('storeId')
-				'status' => "Paid",
-				'totalAmount' => $cart->sum('price')
-			]);
+			    'customer_id' => session('custId'),
+                'store_id' => $product->store_id, //session('storeId')
+                'status' => "Paid",
+                'totalAmount' => $cart->sum('price')
+            ]);
 
 			foreach ($cart as $index => $item) {
 				OrderDetails::create([

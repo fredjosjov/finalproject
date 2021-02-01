@@ -139,6 +139,10 @@ h1 {
 
 }
 
+#sales-trend {
+    align-self: center;
+}
+
 #status-field {
     display: flex;
     justify-content: end;
