@@ -31,7 +31,11 @@ setlocale(LC_MONETARY, 'en_US');
             <div class="card text-center" style="width: 20rem;">
                 <div class="card-body main-cards">
                     <h2 class="card-title main-card-title">Completed Orders</h2>
+                    @if(!isset($orders) || $orders->count() > 0)
                     <h3 class="card-text"> <span style="color: red;"> {{ $completedOrders->count() }} </span> / {{ $orders->count() }} <span style="font-size: 16px;">({{ $completedOrders->count() / $orders->count() * 100 }}%)</span></h3>
+                        @else
+                    <h3 class="card-text">0</h3>
+                        @endif
                 </div>
             </div>
         </div>
@@ -90,12 +94,14 @@ setlocale(LC_MONETARY, 'en_US');
 @section('js-script')
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+        @if($orders->count() > 0)
         google.charts.load('current', {'packages': ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
         var dataMapping = new Map([
             ['Date', 'Sales']
         ]);
+
 
         @foreach($orders as $order)
         if (!dataMapping.has("{{ $order->created_at->format('F d') }}")) {
@@ -128,5 +134,6 @@ setlocale(LC_MONETARY, 'en_US');
                 chart.draw(data, options);
             }
         }
+        @endif
     </script>
 @endsection
