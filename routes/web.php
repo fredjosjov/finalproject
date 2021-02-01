@@ -47,6 +47,7 @@ Route::get('/store/{store}/analytics', 'App\Http\Controllers\StoreController@sta
 Route::get('/store/{store}/profile', 'App\Http\Controllers\StoreController@showProfile');
 Route::get('/store/{store}/customers', 'App\Http\Controllers\CustomerController@index');
 Route::get('/store/{store}/orders', 'App\Http\Controllers\OrderController@index');
+Route::get('/store/{store}/orders/search', 'App\Http\Controllers\OrderController@search')->name('store-orders.search');
 Route::get('/store/{store}/order/{id}', 'App\Http\Controllers\OrderController@show');
 Route::put('/store/{store}/order/{id}/update', 'App\Http\Controllers\OrderController@update')->name('order-status.update');
 Route::get('/store/{store}/products', '\App\Http\Controllers\ProductController@indexStore');

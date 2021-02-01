@@ -73,4 +73,16 @@ class OrderController extends Controller
             return redirect('/');
         }
     }
+
+    public function search(){
+        $term = request()->input('term');
+        $orders = Order::query()->where('created_at' , 'LIKE','%'.$term.'%')
+            ->orWhere('updated_at', 'LIKE','%'.$term.'%')
+            ->orWhere('status', 'LIKE','%'.$term.'%')->get();
+        $orders = $orders->where('store_id', request()->input('store_id'));
+        return view('stores.orders.index', [
+            'orders' => $orders,
+            'store' => Store::find(request()->input('store_id'))
+        ]);
+    }
 }

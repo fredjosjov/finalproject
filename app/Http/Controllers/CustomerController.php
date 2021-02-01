@@ -54,4 +54,8 @@ class CustomerController extends Controller
             return redirect('/');
         }
     }
+
+    public function search(){
+        $term = request()->input('term');
+    }
 }
