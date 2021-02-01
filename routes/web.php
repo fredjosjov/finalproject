@@ -51,6 +51,7 @@ Route::get('/store/{store}/orders/search', 'App\Http\Controllers\OrderController
 Route::get('/store/{store}/order/{id}', 'App\Http\Controllers\OrderController@show');
 Route::put('/store/{store}/order/{id}/update', 'App\Http\Controllers\OrderController@update')->name('order-status.update');
 Route::get('/store/{store}/products', '\App\Http\Controllers\ProductController@indexStore');
+Route::get('/store/{store}/products/search', '\App\Http\Controllers\ProductController@searchStore')->name('store-products.search');
 Route::get('/store/{store}/products/{mode}/{id}', '\App\Http\Controllers\ProductController@editListingItem');
 Route::put('/store/{store}/products/update-price', '\App\Http\Controllers\ProductController@updateListingPrices')->name('store-products.update-price');
 Route::get('/store/{store}/products/create', '\App\Http\Controllers\ProductController@create');

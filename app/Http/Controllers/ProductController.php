@@ -194,6 +194,21 @@ class ProductController extends Controller
         }
     }
 
+    public function searchStore(){
+        $term = request()->input('term');
+
+        $products = Product::query()->where('name', 'LIKE', '%'.$term.'%')
+            ->orWhere('description', 'LIKE', '%'.$term.'%')
+            ->orWhere('id', 'like', '%'.$term.'%')->get();
+
+        $products = $products->where('store_id', request()->input('store_id'));
+        return view('stores.products.index', [
+            'products' => $products,
+            'activeListing' => $products->where('is_active', 1),
+            'store' => Store::find(request()->input('store_id'))
+        ]);
+    }
+
     public function validateInputs(): array
     {
         return request()->validate([
