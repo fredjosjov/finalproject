@@ -138,14 +138,6 @@ class LoginController extends Controller
                     $customer->address = $request->address;
                     $customer->save();
     
-                    $seller = new Seller;
-                    $seller->user_id = $userId;
-                    $seller->firstName = $request->firstName;
-                    $seller->lastName = $request->lastName;
-                    $seller->phone = $request->phone;
-                    $seller->address = $request->address;
-                    $seller->save();
-    
                     return redirect('/')->with('stat', 'Account has been created!');
                 }
             }else{
