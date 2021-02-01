@@ -15,7 +15,8 @@ setlocale(LC_MONETARY, 'en_US');
             <div class="card text-center" style="width: 20rem;">
                 <div class="card-body main-cards">
                     <h2 class="card-title main-card-title">Products Listed</h2>
-                    <h3 class="card-text"> <span style="color: blue;">{{ $activeProducts->count() }}</span> / {{ $products->count() }}</h3>
+                    <h3 class="card-text"><span style="color: blue;">{{ $activeProducts->count() }}</span>
+                        / {{ $products->count() }}</h3>
                 </div>
             </div>
         </div>
@@ -32,10 +33,18 @@ setlocale(LC_MONETARY, 'en_US');
                 <div class="card-body main-cards">
                     <h2 class="card-title main-card-title">Completed Orders</h2>
                     @if(!isset($orders) || $orders->count() > 0)
-                    <h3 class="card-text"> <span style="color: red;"> {{ $completedOrders->count() }} </span> / {{ $orders->count() }} <span style="font-size: 16px;">({{ number_format($completedOrders->count() / $orders->count() * 100, 0) }}%)</span></h3>
-                        @else
-                    <h3 class="card-text">0</h3>
-                        @endif
+                        <h3 class="card-text"> <span style="
+                            @if($completedOrders != null and $orders != null and $completedOrders->count() < $orders->count())
+                                color: red;
+                            @else
+                                color: black;
+                            @endif
+                                "> {{ $completedOrders->count() }} </span> / {{ $orders->count() }} <span
+                                style="font-size: 16px;">({{ number_format($completedOrders->count() / $orders->count() * 100, 0) }}%)</span>
+                        </h3>
+                    @else
+                        <h3 class="card-text">0</h3>
+                    @endif
                 </div>
             </div>
         </div>
