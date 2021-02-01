@@ -12,13 +12,19 @@
   </head>
   <body>
     <div class="container mt-4">
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron jumbotron-fluid mb-0">
             <div class="container">
                 <h1>Login</h1>
                 <br>
                 @if (session('status'))
                         <div class="alert alert-danger">
                             {{ session('status') }}
+                        </div>
+                @endif
+                
+                @if (session('stat'))
+                        <div class="alert alert-success">
+                            {{ session('stat') }}
                         </div>
                 @endif
                 <form action="/login" method="post">
@@ -37,10 +43,11 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
                 </form>
             </div>
         </div>
+        <a href="/registration">Click here if you do not have an account</a>
     </div>
     
     <!-- Optional JavaScript -->
