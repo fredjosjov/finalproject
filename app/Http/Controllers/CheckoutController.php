@@ -38,6 +38,19 @@ class CheckoutController extends Controller
 			'cart' => $cart,
 			'productId' => $id 	//addition
 		]);
+
+		$returnVariableArray = array();
+		if (!$cart->isEmpty()) {
+			$returnVariableArray = [
+				'cart' => $cart,
+				'productId' => $cart->first()->product_id
+			];
+		} else {
+			$returnVariableArray = [
+				'cart' => $cart
+			];
+		}
+		return view('checkout.index', $returnVariableArray);
 	}
 
 	public function tambah()

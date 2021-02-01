@@ -10,7 +10,7 @@
     <div style="width: 40rem;">
         <ul class="list-group list-group-flush">
             @foreach($orders as $order)
-                <div class="card" style="width: 18rem;">
+                <div class="card mt-3 mb-3" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Store: {{$order->store->name}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Total Amount: Rp {{$order->totalAmount}}</h6>

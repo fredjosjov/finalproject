@@ -45,7 +45,7 @@ class CustomerController extends Controller
     {
         if(session()->has('credentials')){
             $store_ = \App\Models\Store::find($store);
-            $orders = \App\Models\Order::orderBy('created_at', 'DESC')->where('store_id', $store)->get();
+            $orders = $store_->orders()->get()->sortByDesc('created_at');
             return view('stores.customers.index', [
                 'store' => $store_,
                 'orders' => $orders

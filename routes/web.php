@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\LoginController@index');
 Route::post('/login', 'App\Http\Controllers\loginController@login');
 Route::get('/logout', 'App\Http\Controllers\loginController@logout');
+Route::get('/registration', 'App\Http\Controllers\loginController@registration');
+Route::post('/registration', 'App\Http\Controllers\loginController@store');
 
 Route::get('/product', 'App\Http\Controllers\productController@index');
 Route::post('/product', 'App\Http\Controllers\productController@search');
