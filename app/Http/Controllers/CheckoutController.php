@@ -27,10 +27,17 @@ class CheckoutController extends Controller
 			//			->where('carts.isOrder', '=', 0)
 			->select('carts.*', 'products.image', 'products.name')
 			->get();
+
+		if (!empty($cart) && count($cart) > 0) {
+
+			$id = $cart[0]->product_id;
+		} else {
+			$id = 0;
+		}
 		return view('checkout.index', [
-		    'cart' => $cart,
-            'productId' => $cart->first()->product_id //addition
-        ]);
+			'cart' => $cart,
+			'productId' => $id 	//addition
+		]);
 	}
 
 	public function tambah()
@@ -45,7 +52,7 @@ class CheckoutController extends Controller
 
 	public function payment(Request $request)
 	{
-	    $product = Product::find(request()->product_id);
+		$product = Product::find(request()->product_id);
 		$cart = DB::table('carts')
 			->join('products', 'products.id', '=', 'carts.product_id')
 			->where('carts.customer_id', '=', session('custId'))

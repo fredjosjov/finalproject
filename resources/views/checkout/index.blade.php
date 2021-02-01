@@ -29,6 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if(!empty($cart))
                         @foreach($cart as $p)
                         <tr>
                             <td><img src="{{ $p->image }}" style="max-width: 120px;" /></td>
@@ -37,10 +38,14 @@
                             <td>{{ $p->price }}</td>
                         </tr>
                         @endforeach
+                        @endif
+                        @if(!empty($cart))
                         <tr>
+
                             <td colspan="3" class="font-500" align="right">Total Amount</td>
                             <td class="font-500">{{$cart->sum('price')}}</td>
                         </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -79,7 +84,7 @@
                                 </div>
                             </div>
                             <button class="btn btn-info">Make Payment</button>
-{{--                            Below is an addition to be able to pull product when making payment--}}
+                            {{-- Below is an addition to be able to pull product when making payment--}}
                             <input type="text" value="{{ $productId }}" name="product_id" hidden>
                         </form>
                     </div>

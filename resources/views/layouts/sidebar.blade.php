@@ -25,11 +25,9 @@
             <li> <a href="index.html" class="waves-effect active"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu"> E-commerce <span class="fa arrow"></span></span></a>
                 <ul class="nav nav-second-level">
                     <li> <a href="index.html">Dashboard</a> </li>
-                    <li> <a href="products.html">Products</a> </li>
-                    <li> <a href="product-detail.html">Product Detail</a> </li>
-                    <li> <a href="product-edit.html">Product Edit</a> </li>
+                    <li> <a href="{{url('/product')}}">Products</a> </li>
                     <li> <a href="{{url('/shipping')}}">Product Orders</a> </li>
-                    <li> <a href="product-cart.html">Product Cart</a> </li>
+                    <li> <a href="{{url('/cart')}}">Product Cart</a> </li>
                     <li> <a href="{{url('/checkout')}}">Product Checkout</a> </li>
                     <li> <a href="{{url('/wishlist')}}">Product Wishlist</a> </li>
                 </ul>

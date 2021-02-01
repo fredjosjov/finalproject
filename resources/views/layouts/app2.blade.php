@@ -48,7 +48,7 @@
                 @yield ('content')
             </div>
             <!-- /.container-fluid -->
-            <footer class="footer text-center"> Copyright © {{ date('Y') }} Elite Admin </footer>
+            <footer class="footer text-center"> Copyright © {{ date('Y') }} Joseph </footer>
         </div>
     </div>
     <!-- Bootstrap Core JavaScript -->

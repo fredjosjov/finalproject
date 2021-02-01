@@ -41,6 +41,7 @@ Route::post('/shipping/saveFeedback', 'App\Http\Controllers\ShippingController@s
 
 Route::get('/wishlist', 'App\Http\Controllers\WishlistController@index');
 Route::post('/wishlist/addWishlist/{id}', 'App\Http\Controllers\WishlistController@addWishlist');
+Route::post('/wishlist/addCart/{id}', 'App\Http\Controllers\WishlistController@addCart');
 
 
 Route::get('/store/{store}/analytics', 'App\Http\Controllers\StoreController@stats');
@@ -59,4 +60,3 @@ Route::post('/store/{store}/products', '\App\Http\Controllers\ProductController@
 Route::delete('/store{store}/products', '\App\Http\Controllers\ProductController@destroy')->name('store-products.delete');
 Route::post('/store/{store}/products/create', 'App\Http\Controllers\ProductController@showSpecific')->name('store-products.edit');
 Route::put('/store/{store}/products/{product}/update', 'App\Http\Controllers\ProductController@update')->name('store-products.update');
-

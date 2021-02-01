@@ -101,7 +101,7 @@
           <tbody>
             @foreach($shipping as $p)
             <tr>
-              <td>{{ $p->orders_id }}</td>
+              <td>{{ $p->order_id }}</td>
               <td> <img src="{{ $p->image }}" alt="iMac" width="80"> </td>
               <td>{{ $p->name }}</td>
               <td>{{ $p->quantity }}</td>
@@ -111,7 +111,7 @@
                 @if($p->status == "Delivered")
                 <a onclick="feedbackPopUp({{ $p->product_id }})" class="btn btn-primary">Feedback</a>
                 @else
-                <a href="/shipping/changeStatus/{{ $p->shipping_id }}/{{ $p->product_id }}/{{$p->orders_id}}" class="btn btn-success" onclick="return confirm('Are you sure you want to change this item status to Delivered?');">Delivered</a>
+                <a href="/shipping/changeStatus/{{ $p->shipping_id }}/{{ $p->product_id }}/{{$p->order_id}}" class="btn btn-success" onclick="return confirm('Are you sure you want to change this item status to Delivered?');">Delivered</a>
                 @endif
               </td>
             </tr>
