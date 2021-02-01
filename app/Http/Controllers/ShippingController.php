@@ -20,7 +20,7 @@ class ShippingController extends Controller
 			->join('order_details', 'orders.id', '=', 'order_details.order_id')
 			->join('customers', 'customers.id', '=', 'orders.customer_id')
 			->select('shipping_details.*', 'products.name', 'order_details.quantity', 'products.image')
-			->where('orders.customer_id', '=', session('custId'))
+			->where('orders.customer_id', '=', session('custId'))->orderBy('created_at','DESC')
 			->get();
 
 		return view('shipping.index', ['shipping' => $shipping]);
