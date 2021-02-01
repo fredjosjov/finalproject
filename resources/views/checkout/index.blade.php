@@ -80,7 +80,9 @@
                             </div>
                             <button class="btn btn-info">Make Payment</button>
 {{--                            Below is an addition to be able to pull product when making payment--}}
+                            @if(isset($productId))
                             <input type="text" value="{{ $productId }}" name="product_id" hidden>
+                                @endif
                         </form>
                     </div>
                     <div class="clearfix"></div>
