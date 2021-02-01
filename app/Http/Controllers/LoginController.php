@@ -36,11 +36,12 @@ class LoginController extends Controller
 
         $users = User::where('email', $emailInput)->get(); // originally Login:: ...
         if($users->first()->sellerInfo()->first() != null) { //addition to detect whether user has seller account
-            $store_id = $users->first()->sellerInfo()->first()->id; //addition from above
             $hasSellerAccount = true;
+            $store_id = $users->first()->sellerInfo()->first()->store->id; //addition from above
         } else{
             $hasSellerAccount = false;
         }
+
         if(count($users) == 0){
             return redirect('/')->with('status', 'Login credentials are Invalid!');
         }else{
@@ -57,7 +58,7 @@ class LoginController extends Controller
                     $sellers = Seller::where('user_id', $user->id)->get();
                     foreach($sellers as $seller){
                         $storeId = $seller->store->id;
-                        session()->put('storeId', $storeId);
+                        //session()->put('storeId', $storeId);
                     }
                     return redirect('/product');
                 }else{
