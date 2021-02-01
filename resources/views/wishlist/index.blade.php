@@ -21,7 +21,7 @@
             <div class="product-img">
                 <img src="{{ $p->image }}" />
                 <div class="pro-img-overlay">
-                    <a href="javascript:void(0)" onclick="addCart('{{$p->id}}')" class="bg-success"><i class="ti-shopping-cart"></i></a>
+                    <a href="javascript:void(0)" onclick="addCart('{{$p->product_id}}')" class="bg-success"><i class="ti-shopping-cart"></i></a>
                     <a href="javascript:void(0)" onclick="addWishlist('{{$p->product_id}}')" class="bg-danger"><i class="ti-heart"></i></a>
                 </div>
             </div>
