@@ -29,6 +29,9 @@ class CustomerController extends Controller
         $customer->address = $request->address;
         $customer->save();
 
+
+        session()->put('custName', $customer->firstName . ' ' . $customer->lastName);
+
         $notification = array(
             'message' => 'Customer updated successfully!',
             'alert-type' => 'success'
@@ -43,7 +46,7 @@ class CustomerController extends Controller
      */
     public function index(string $store)
     {
-        if(session()->has('credentials')){
+        if (session()->has('credentials')) {
             $store_ = \App\Models\Store::find($store);
             $orders = $store_->orders()->get()->sortByDesc('created_at');
             return view('stores.customers.index', [
@@ -55,7 +58,8 @@ class CustomerController extends Controller
         }
     }
 
-    public function search(){
+    public function search()
+    {
         $term = request()->input('term');
     }
 }

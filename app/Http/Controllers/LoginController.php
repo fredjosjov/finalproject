@@ -18,14 +18,15 @@ class LoginController extends Controller
      */
     public function index()
     {
-        if(session()->has('credentials')){
+        if (session()->has('credentials')) {
             return redirect('/product');
-        }else{
+        } else {
             return view('login.index');
         }
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $emailInput = $request->email;
         $passwordInput = $request->password;
 
@@ -35,33 +36,33 @@ class LoginController extends Controller
         ]);
 
         $users = User::where('email', $emailInput)->get(); // originally Login:: ...
-        if($users->first()->sellerInfo()->first() != null) { //addition to detect whether user has seller account
+        if ($users->first()->sellerInfo()->first() != null) { //addition to detect whether user has seller account
             $hasSellerAccount = true;
             $store_id = $users->first()->sellerInfo()->first()->store->id; //addition from above
-        } else{
+        } else {
             $hasSellerAccount = false;
         }
 
-        if(count($users) == 0){
+        if (count($users) == 0) {
             return redirect('/')->with('status', 'Login credentials are Invalid!');
-        }else{
-            foreach($users as $user){
-                if($emailInput == $user->email && $passwordInput == $user->password){
+        } else {
+            foreach ($users as $user) {
+                if ($emailInput == $user->email && $passwordInput == $user->password) {
                     session()->put('credentials', $user->email);
                     $customer = Customer::where('user_id', $user->id)->get();
-                    foreach($customer as $cust){
+                    foreach ($customer as $cust) {
                         session()->put('custId', $cust->id);
                         session()->put('custName', $cust->firstName . ' ' . $cust->lastName);
-                        if($hasSellerAccount)
-                        session()->put('storeId', $store_id); //addition just in case customer has seller account
+                        if ($hasSellerAccount)
+                            session()->put('storeId', $store_id); //addition just in case customer has seller account
                     }
                     $sellers = Seller::where('user_id', $user->id)->get();
-                    foreach($sellers as $seller){
+                    foreach ($sellers as $seller) {
                         $storeId = $seller->store->id;
                         //session()->put('storeId', $storeId);
                     }
                     return redirect('/product');
-                }else{
+                } else {
                     return redirect('/')->with('status', 'Login credentials are Invalid!');
                 }
             }
@@ -70,13 +71,13 @@ class LoginController extends Controller
 
     public function logout()
     {
-        if(session()->has('credentials')){
+        if (session()->has('credentials')) {
             session()->pull('credentials');
             session()->pull('custId');
             session()->pull('custName');
             session()->pull('storeId');
             return redirect('/');
-        }else{
+        } else {
             return redirect('/product');
         }
     }
@@ -116,12 +117,12 @@ class LoginController extends Controller
 
         $userEmail = User::where('email', $request->email)->get();
 
-        if(count($userEmail) == 0){
-            if($request->password == $request->confirmPassword){                
+        if (count($userEmail) == 0) {
+            if ($request->password == $request->confirmPassword) {
                 $ids = User::orderBy('id', 'DESC')
                     ->limit(1)
                     ->get('id');
-                foreach($ids as $id){
+                foreach ($ids as $id) {
                     $userId = $id->id + 1;
 
                     $user = new User;
@@ -129,7 +130,7 @@ class LoginController extends Controller
                     $user->password = $request->password;
                     $user->email = $request->email;
                     $user->save();
-    
+
                     $customer = new Customer;
                     $customer->user_id = $userId;
                     $customer->firstName = $request->firstName;
@@ -137,16 +138,15 @@ class LoginController extends Controller
                     $customer->phone = $request->phone;
                     $customer->address = $request->address;
                     $customer->save();
-    
+
                     return redirect('/')->with('stat', 'Account has been created!');
                 }
-            }else{
+            } else {
                 return redirect('/registration')->with('status', 'Password does not match');
             }
-        }else{
+        } else {
             return redirect('/registration')->with('status', 'Email has been taken');
         }
-
     }
 
     /**
