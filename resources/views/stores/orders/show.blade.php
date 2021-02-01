@@ -9,7 +9,6 @@ setlocale(LC_MONETARY, 'en_US');
 
 @section('modal')
     <div class="modal" tabindex="-1" role="dialog" id="confirmation-message-modal">
-
         @csrf
         @method('PUT')
         <div class="modal-dialog" role="document">
@@ -52,6 +51,7 @@ setlocale(LC_MONETARY, 'en_US');
                             <br>
                             For inquiries and support, kindly contact admin at support@fredjosjov.com.
                         </p>
+                        @break
                     @endswitch
                 </div>
                 <div class="modal-footer">
@@ -132,12 +132,13 @@ setlocale(LC_MONETARY, 'en_US');
                         @break
                         @case('Shipped-Problematic')
                         <p id="support-message">Processing your Support Request</p>
+                        @break
                     @endswitch
                 </div>
                 @if($order->status != 'Shipped' and $order->status != 'Shipped-Problematic')
                     <div class="col-md-2 justify-content-center" style="display: flex;">
                         <button type="button" class="btn btn-primary" data-toggle="modal"
-{{--                                --}}
+                                {{--                                --}}
                                 data-target="#confirmation-message-modal" {{ !isset($shipping) ? 'disabled' : '' }} {{ $order->status === 'Completed' ? 'hidden' : '' }}>
                             Update Status
                         </button>
