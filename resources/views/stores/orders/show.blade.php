@@ -137,6 +137,7 @@ setlocale(LC_MONETARY, 'en_US');
                 @if($order->status != 'Shipped' and $order->status != 'Shipped-Problematic')
                     <div class="col-md-2 justify-content-center" style="display: flex;">
                         <button type="button" class="btn btn-primary" data-toggle="modal"
+{{--                                --}}
                                 data-target="#confirmation-message-modal" {{ !isset($shipping) ? 'disabled' : '' }} {{ $order->status === 'Completed' ? 'hidden' : '' }}>
                             Update Status
                         </button>
