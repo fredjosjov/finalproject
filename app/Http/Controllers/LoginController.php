@@ -36,11 +36,15 @@ class LoginController extends Controller
         ]);
 
         $users = User::where('email', $emailInput)->get(); // originally Login:: ...
-        if ($users->first()->sellerInfo()->first() != null) { //addition to detect whether user has seller account
-            $hasSellerAccount = true;
-            $store_id = $users->first()->sellerInfo()->first()->store->id; //addition from above
-        } else {
-            $hasSellerAccount = false;
+        if(count($users) == 0){
+            return redirect('/')->with('status', 'Login credentials are Invalid!');
+        }else{
+            if ($users->first()->sellerInfo()->first() != null) { //addition to detect whether user has seller account
+                $hasSellerAccount = true;
+                $store_id = $users->first()->sellerInfo()->first()->store->id; //addition from above
+            } else {
+                $hasSellerAccount = false;
+            }
         }
 
         
