@@ -31,14 +31,14 @@
                 @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter email">
+                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter email" value="{{ old('email') }}">
                         @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control @error('email') is-invalid @enderror" id="password" name="password" placeholder="Password">
+                        <input type="password" class="form-control @error('email') is-invalid @enderror" id="password" name="password" placeholder="Password" value="{{ old('password') }}">
                         @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
