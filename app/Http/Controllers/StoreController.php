@@ -17,7 +17,7 @@ class StoreController extends Controller
     public function stats(Store $store)
     {
         if (session()->has('credentials')) {
-            $orders = $store->orders()->get();
+            $orders = $store->orders()->get()->sortBy('created_at');
             $revenue = 0;
 
             foreach ($orders as $order) {
