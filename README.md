@@ -20,7 +20,7 @@ https://laravel.com/docs/8.x/installation
 > `DB_USERNAME=`  
 > `DB_PASSWORD=`
 
-4. Seed the newly created database by running `php artisan db:seed` using your project's terminal.
+4. (Optional) If you didn't import `ecom_final_schema.sql`, Seed the newly created database by running `php artisan db:seed` using your project's terminal.
 
 5. Utilizing the terminal, please move to the project's directory and run `php artisan serve`. Alternatively, this can be done using the IDE's terminal.
 
