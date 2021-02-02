@@ -214,8 +214,8 @@ class ProductController extends Controller
         return request()->validate([
             'store_id' => 'required',
             'name' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
+            'quantity' => 'required|numeric',
+            'price' => 'required|numeric',
             'description' => 'nullable',
             'is_active' => 'required'
         ]);

@@ -31,7 +31,7 @@ class LoginController extends Controller
         $passwordInput = $request->password;
 
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required'
         ]);
 
@@ -47,7 +47,7 @@ class LoginController extends Controller
             }
         }
 
-        
+
         if (count($users) == 0) {
             return redirect('/')->with('status', 'Login credentials are Invalid!');
         } else {
