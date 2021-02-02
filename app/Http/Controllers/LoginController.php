@@ -119,28 +119,21 @@ class LoginController extends Controller
 
         if (count($userEmail) == 0) {
             if ($request->password == $request->confirmPassword) {
-                // $ids = User::orderBy('id', 'DESC')
-                //     ->limit(1)
-                //     ->get('id');
-                // foreach ($ids as $id) {
-                //     $userId = $id->id + 1;
+                $user = new User;
+                $user->id = $request->email;
+                $user->password = $request->password;
+                $user->email = $request->email;
+                $user->save();
 
-                    $user = new User;
-                    $user->id = $request->email;
-                    $user->password = $request->password;
-                    $user->email = $request->email;
-                    $user->save();
+                $customer = new Customer;
+                $customer->user_id = $request->email;
+                $customer->firstName = $request->firstName;
+                $customer->lastName = $request->lastName;
+                $customer->phone = $request->phone;
+                $customer->address = $request->address;
+                $customer->save();
 
-                    $customer = new Customer;
-                    $customer->user_id = $request->email;
-                    $customer->firstName = $request->firstName;
-                    $customer->lastName = $request->lastName;
-                    $customer->phone = $request->phone;
-                    $customer->address = $request->address;
-                    $customer->save();
-
-                    return redirect('/')->with('stat', 'Account has been created!');
-                // }
+                return redirect('/')->with('stat', 'Account has been created!');
             } else {
                 return redirect('/registration')->with('status', 'Password does not match');
             }
