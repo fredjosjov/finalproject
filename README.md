@@ -12,8 +12,12 @@ https://laravel.com/docs/8.x/installation
 ### Steps to run the application:
 1. Rename the `env.example` into `.env` in the file directory.
 
-2. Import the following files to the database: `ecom_final_schema.sql` to create the database schema and `ecom_final_data.sql` to fill the database. This file is available in the project directory when it is cloned from this repository.
-
+2. Import the following file `ecom_final.sql` to the database . Alternatively:  
+   >  - `ecom_final_schema.sql` to create the database schema.
+   >  - `ecom_final_data.sql` to fill the database.  
+   > 
+   >  **Note:** That all these database related files are available on the project's directory.
+   
 3. In order for the database to properly work, please kindly configure the `.env` file first. The following information needs to be adjusted according to your PhpMyAdmin database parameters:
 > `DB_PORT=`   
 > `DB_DATABASE=ecom_final`  
