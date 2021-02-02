@@ -29,7 +29,7 @@ class ProductFactory extends Factory
             'quantity' => $this->faker->numberBetween($min = 0, $max = 100),
             'price' => $this->faker->randomFloat($nbMaxDecimals= 2, $min = 0, $max= 999),
             'description' => $this->faker->text,
-            'image' => NULL
+            'is_active' => true
         ];
     }
 }
