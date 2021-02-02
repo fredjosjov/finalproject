@@ -21,7 +21,7 @@
         </div>
         <hr class="solid" style="border: 2px solid #232E3D; margin: 4px 0 8px 0;">
         <div class="row">
-            <div class="col-md-2 justify-content-center" id="product-image">
+            <div class="col-md-3 justify-content-center" id="product-image">
                 <div class="card h-100" style="width: 18rem;">
                     <div class="card-body">
                         @if(isset($product->image))
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <div class="row">
                     <h2 class="sub-title"> Product Information </h2>
                 </div>

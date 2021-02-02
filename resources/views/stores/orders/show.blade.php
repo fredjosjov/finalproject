@@ -139,7 +139,7 @@ setlocale(LC_MONETARY, 'en_US');
                     <div class="col-md-2 justify-content-center" style="display: flex;">
                         <button type="button" class="btn btn-primary" data-toggle="modal"
                                 {{--                                --}}
-                                data-target="#confirmation-message-modal" {{ !isset($shipping) ? 'disabled' : '' }} {{ $order->status === 'Completed' ? 'hidden' : '' }}>
+                                data-target="#confirmation-message-modal" {{-- !isset($shipping) ? 'disabled' : '' --}} {{ $order->status === 'Completed' ? 'hidden' : '' }}>
                             Update Status
                         </button>
                     </div>
