@@ -43,11 +43,13 @@ class LoginController extends Controller
             $hasSellerAccount = false;
         }
 
+        
         if (count($users) == 0) {
             return redirect('/')->with('status', 'Login credentials are Invalid!');
         } else {
             foreach ($users as $user) {
-                if ($emailInput == $user->email && $passwordInput == $user->password) {
+                $isPasswordCorrect = password_verify($passwordInput, $user->password);
+                if ($emailInput == $user->email && $isPasswordCorrect == true) {
                     session()->put('credentials', $user->email);
                     $customer = Customer::where('user_id', $user->id)->get();
                     foreach ($customer as $cust) {
@@ -121,7 +123,7 @@ class LoginController extends Controller
             if ($request->password == $request->confirmPassword) {
                 $user = new User;
                 $user->id = $request->email;
-                $user->password = $request->password;
+                $user->password = password_hash($request->password, PASSWORD_DEFAULT);
                 $user->email = $request->email;
                 $user->save();
 
