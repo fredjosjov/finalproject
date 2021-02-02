@@ -103,7 +103,7 @@ setlocale(LC_MONETARY, 'en_US');
                 </div>
                 <div class="col-md-4 justify-content-end" style="display: flex;">
                     <p class="summary-details">Total Value : <span
-                            id="total-value">{{ money_format('%i', $order->totalAmount) }}</span></p>
+                            id="total-value">USD {{ $order->totalAmount }}</span></p>
                 </div>
             </div>
             <div class="row" style="margin-bottom: 10px;">
@@ -182,11 +182,11 @@ setlocale(LC_MONETARY, 'en_US');
                 <div class="row">
                     <div class="col-md-6">
                         <h5 class="products-info">Buy Price (ea.)
-                            : {{ money_format('%i', $product->pivot->price) }}</h5>
+                            : USD {{ $product->pivot->price }}</h5>
                     </div>
                     <div class="col-md-6 justify-content-end" style="display: flex;">
                         <h4 id="total-value-info" class="products-info">Total Value
-                            : {{ money_format('%i', $product->pivot->quantity * $product->pivot->price) }}</h4>
+                            : USD {{ $product->pivot->quantity * $product->pivot->price }}</h4>
                     </div>
                 </div>
 

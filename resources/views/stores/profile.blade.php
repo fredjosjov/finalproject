@@ -69,7 +69,7 @@ setlocale(LC_MONETARY, 'en_US');
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">{{ $product->quantity }} products selling
-                                @ {{ money_format('%i', $product->price) }} each.</small>
+                                @ USD {{ $product->price }} each.</small>
                         </div>
                     </div>
                 @endforeach
