@@ -12,7 +12,7 @@ https://laravel.com/docs/8.x/installation
 ### Steps to run the application:
 1. Rename the `env.example` into `.env` in the file directory.
 
-2. Import the following file `ecom_final.sql` to the database . Alternatively:  
+2. Import the following file: `ecom_final.sql` to the database . Alternatively:  
    >  - `ecom_final_schema.sql` to create the database schema.
    >  - `ecom_final_data.sql` to fill the database.  
    > 
@@ -24,7 +24,7 @@ https://laravel.com/docs/8.x/installation
 > `DB_USERNAME=`  
 > `DB_PASSWORD=`
 
-4. (Optional) If you didn't import `ecom_final_schema.sql`, Seed the newly created database by running `php artisan db:seed` using your project's terminal.
+4. (Optional) If you only import `ecom_final_schema.sql`, Seed the newly created database by running `php artisan db:seed` using your project's terminal.
 
 5. Utilizing the terminal, please move to the project's directory and run `php artisan serve`. Alternatively, this can be done using the IDE's terminal.
 
