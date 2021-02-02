@@ -30,7 +30,7 @@ class OrderFactory extends Factory
             'customer_id' => $customer->id,
             'store_id' => $store->id,
             'totalAmount' => 0,
-            'status' => 'Newly Created',
+            'status' => 'Paid',
         ];
     }
 }
